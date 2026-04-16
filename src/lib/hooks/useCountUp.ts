@@ -19,13 +19,15 @@ export function useCountUp(target: number, duration = 2000) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !triggered.current) {
+          // pequeno delay para garantir que a animação do pai já iniciou
+          setTimeout(() => {
+          setTimeout(() => {
           triggered.current = true
           const startTime = performance.now()
 
           const animate = (now: number) => {
             const elapsed = now - startTime
             const progress = Math.min(elapsed / duration, 1)
-            // Cubic ease-out: decelerates as it approaches the target
             const eased = 1 - Math.pow(1 - progress, 3)
             setCount(Math.floor(eased * target))
 
@@ -38,9 +40,10 @@ export function useCountUp(target: number, duration = 2000) {
           }
 
           rafRef.current = requestAnimationFrame(animate)
+          }, 400)
         }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px 0px 0px' }
     )
 
     observer.observe(el)

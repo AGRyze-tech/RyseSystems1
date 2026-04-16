@@ -111,7 +111,7 @@ export default function Hero() {
         transition={{ duration: 0.6, delay: 0.9 }}
         className="relative z-10 flex flex-col gap-6 mt-8"
       >
-        <div className="flex gap-3 w-fit">
+        <div className="flex gap-3 w-full max-w-[420px]">
           {[
             { value: '50+', label: 'projetos entregues', cta: 'Ver portfólio', href: '#portfolio' },
             { value: '~2sem', label: 'do briefing ao lançamento. sem enrolação.', cta: 'Saiba como', href: '#processo' },
@@ -121,7 +121,7 @@ export default function Hero() {
               role="button"
               tabIndex={0}
               aria-label={`${s.value} ${s.label} — ${s.cta}`}
-              className="group relative bg-[#111F14] rounded-2xl p-4 sm:p-6 w-[160px] sm:w-[200px] flex flex-col justify-between overflow-hidden cursor-pointer hover:bg-[#162219] transition-colors duration-300"
+              className="group relative bg-[#111F14] rounded-2xl p-4 sm:p-6 flex-1 min-w-0 flex flex-col justify-between overflow-hidden cursor-pointer hover:bg-[#162219] transition-colors duration-300"
               onClick={() => scrollTo(s.href)}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollTo(s.href) } }}
             >

@@ -33,7 +33,7 @@ export default function Sobre() {
   const glowY = useTransform(scrollYProgress, [0, 1], [80, -80])
 
   return (
-    <section ref={sectionRef} id="sobre" className="cv-auto bg-white border-t border-ryze-border/30 relative px-6 py-16 lg:px-8 lg:py-36">
+    <section ref={sectionRef} id="sobre" className="bg-white border-t border-ryze-border/30 relative px-6 py-16 lg:px-8 lg:py-36">
 
       <motion.div
         layout={false}

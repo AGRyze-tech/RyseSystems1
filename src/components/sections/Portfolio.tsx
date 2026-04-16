@@ -60,7 +60,7 @@ export default function Portfolio() {
             <span className="h-1.5 w-1.5 rounded-full bg-[#40916C] inline-block" />
             Case em destaque
           </span>
-          <h2 className="font-display font-black uppercase leading-[0.9] tracking-tight text-[clamp(2.8rem,6vw,6rem)] text-white">
+          <h2 className="font-display font-black uppercase leading-[0.9] tracking-tight text-[clamp(2rem,7vw,6rem)] text-white">
             Transformamos<br />
             <span className="text-[#40916C]">saúde em resultados.</span>
           </h2>
@@ -94,9 +94,9 @@ export default function Portfolio() {
             </div>
 
             {/* Tags — topo esquerdo */}
-            <div className="absolute top-7 left-7 z-10">
-              <span className="inline-flex items-center gap-2 bg-black/30 border border-white/10 rounded-full px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-white/60 backdrop-blur-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#40916C]" />
+            <div className="absolute top-7 left-7 z-10 max-w-[60%]">
+              <span className="inline-flex items-center gap-2 bg-black/30 border border-white/10 rounded-full px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-white/60 backdrop-blur-sm truncate">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#40916C] shrink-0" />
                 {featured.tags}
               </span>
             </div>
@@ -174,9 +174,9 @@ export default function Portfolio() {
                 </div>
 
                 {/* Tags */}
-                <div className="absolute top-5 left-5 z-10">
-                  <span className="inline-flex items-center gap-2 bg-black/30 border border-white/10 rounded-full px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-white/50 backdrop-blur-sm">
-                    <span className="h-1 w-1 rounded-full bg-[#40916C]" />
+                <div className="absolute top-5 left-5 z-10 max-w-[55%]">
+                  <span className="inline-flex items-center gap-2 bg-black/30 border border-white/10 rounded-full px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-white/50 backdrop-blur-sm truncate">
+                    <span className="h-1 w-1 rounded-full bg-[#40916C] shrink-0" />
                     {project.tags}
                   </span>
                 </div>
