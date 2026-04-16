@@ -132,7 +132,7 @@ export default function Contato() {
                 </div>
 
                 {status === 'error' && (
-                  <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 rounded-xl border border-red-500/20 bg-red-500/[0.06] px-4 py-3 text-sm text-red-600">
+                  <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 rounded-xl border border-red-500/20 bg-red-500/[0.06] px-4 py-3 text-sm text-red-400">
                     <AlertCircle size={16} /> Erro ao enviar. Tente novamente.
                   </motion.div>
                 )}
@@ -141,7 +141,7 @@ export default function Contato() {
                   as="button"
                   type="submit"
                   disabled={status === 'loading'}
-                  className="group mt-2 inline-flex items-center justify-center gap-2 bg-ryze-cta text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-ryze-cta/90 hover:shadow-xl hover:shadow-ryze-cta/10 hover:scale-[1.01] disabled:opacity-60 disabled:pointer-events-none"
+                  className="group mt-2 w-full inline-flex items-center justify-center gap-2 bg-ryze-cta text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-ryze-cta/90 hover:shadow-xl hover:shadow-ryze-cta/10 hover:scale-[1.01] disabled:opacity-60 disabled:pointer-events-none"
                 >
                   {status === 'loading' ? (
                     <><Loader2 size={18} className="animate-spin" /> Enviando...</>

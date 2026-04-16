@@ -125,7 +125,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden flex items-center justify-center h-9 w-9 rounded-lg text-ryze-accent/70 hover:text-ryze-accent hover:bg-ryze-accent/[0.06] transition-colors"
+              className="md:hidden flex items-center justify-center h-11 w-11 rounded-lg text-ryze-accent/70 hover:text-ryze-accent hover:bg-ryze-accent/[0.06] transition-colors"
               aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -155,7 +155,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
-                className="h-9 w-9 rounded-lg flex items-center justify-center text-ryze-muted hover:text-ryze-accent transition-colors"
+                className="h-11 w-11 rounded-lg flex items-center justify-center text-ryze-muted hover:text-ryze-accent transition-colors"
                 aria-label="Fechar menu"
               >
                 <X size={20} />

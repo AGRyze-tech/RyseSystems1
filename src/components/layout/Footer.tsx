@@ -9,7 +9,7 @@ import { scrollTo } from '@/lib/scrollTo'
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#0A1A0F] px-6 pt-20 pb-10 lg:px-8 overflow-hidden">
+    <footer className="relative bg-[#0A1A0F] px-6 pt-20 pb-28 md:pb-10 lg:px-8 overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 h-[700px] w-[700px] rounded-full bg-[#1B4332]/20 blur-[140px]" />
       </div>

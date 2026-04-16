@@ -36,11 +36,17 @@ html {
 
 body {
   overflow-x: hidden;
+  overscroll-behavior-x: none;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-dm-sans), sans-serif;
   background-image: radial-gradient(circle, rgba(212, 229, 216, 0.55) 1px, transparent 1px);
   background-size: 28px 28px;
+}
+
+/* Eliminate 300ms tap delay on interactive elements */
+a, button, [role="button"], input, select, textarea {
+  touch-action: manipulation;
 }
 
 /* Hide default cursor on desktop — custom cursor replaces it */
@@ -97,43 +103,15 @@ body {
   100% { transform: translateX(-50%); }
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-@keyframes reveal-up {
-  0% { transform: translateY(100%); }
-  100% { transform: translateY(0); }
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
-}
-
 /* -- Animation utilities ------------------------- */
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
 }
 
-.animate-shimmer {
-  background-size: 200% auto;
-  animation: shimmer 8s ease-in-out infinite;
-}
-
-.animate-pulse-dot {
-  animation: pulse-dot 2s ease-in-out infinite;
-}
-
 @keyframes text-glow {
-  0%, 100% { text-shadow: 0 0 0px rgba(64,145,108,0); }
-  50%       { text-shadow: 0 0 24px rgba(64,145,108,0.55); }
+  0%, 100% { filter: drop-shadow(0 0 0px rgba(64,145,108,0)); }
+  50%       { filter: drop-shadow(0 0 12px rgba(64,145,108,0.55)); }
 }
 
 .text-glow-pulse {
@@ -143,10 +121,8 @@ body {
 /* -- Reduced motion ------------------------------ */
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-float,
   .animate-marquee,
-  .animate-shimmer,
-  .animate-pulse-dot,
+  .hero-particle,
   .animate-ping,
   .animate-pulse,
   .text-glow-pulse {
