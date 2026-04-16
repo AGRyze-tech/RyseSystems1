@@ -1,167 +1,149 @@
 # RyzeSystems — Contexto do Projeto
 
-Agência digital especializada no setor de saúde. Este é o site institucional + landing page de captação da própria RyzeSystems.
+Site institucional + landing page de captação da RyzeSystems.
+Agência digital especializada no setor de saúde (nutricionistas, psicólogos, clínicas).
+
+## Status atual
+- ✅ Site no ar: https://ryse-systems1.vercel.app
+- ✅ Deploy automático via Vercel (push na `main` = novo deploy)
+- ✅ Formulário de contato funcionando via Resend (RESEND_API_KEY configurada na Vercel)
+- ✅ Mobile responsivo corrigido
 
 ## Stack
-- Next.js 14 (App Router) + TypeScript
-- Tailwind CSS com tema customizado
+- Next.js 16 (App Router) + TypeScript
+- Tailwind CSS v4 com tema customizado em globals.css (@theme)
 - Framer Motion para animações
 - Lucide React para ícones
-- Supabase para formulário de contato (tabela `leads`)
+- Resend para envio de email do formulário de contato
+- **Sem Supabase** (o formulário envia email, não salva em banco)
 
 ## Estrutura de Arquivos
 ```
-app/
-  layout.tsx         ← font imports, metadata global
-  page.tsx           ← importa todas as seções em ordem
-  api/contact/route.ts
-components/
-  layout/
-    Navbar.tsx
-    Footer.tsx
-  sections/
-    Hero.tsx
-    Sobre.tsx
-    Servicos.tsx
-    Processo.tsx
-    Diferenciais.tsx
-    Contato.tsx
-lib/
-  supabase.ts
+src/
+  app/
+    layout.tsx              ← fonts (Syne, DM Sans, JetBrains Mono), metadata
+    page.tsx                ← importa todas as seções em ordem
+    globals.css             ← @theme com paleta, keyframes, utilitários
+    api/contact/route.ts    ← POST → envia email via Resend
+  components/
+    layout/
+      Navbar.tsx
+      Footer.tsx
+    sections/
+      Hero.tsx
+      Marquee.tsx
+      Diferenciais.tsx      ← seção "POR QUE ESCOLHER A RYZE" (fundo branco)
+      Processo.tsx          ← timeline animada com scroll
+      Portfolio.tsx         ← cards com iframe preview dos clientes
+      Sobre.tsx             ← stats com countUp animado
+      Contato.tsx           ← formulário de diagnóstico gratuito
+    ui/
+      TiltCard.tsx
+      MagneticButton.tsx
+      ClientShell.tsx       ← cursor customizado (desktop only)
+  lib/
+    animations.ts           ← variants Framer Motion reutilizáveis
+    scrollTo.ts
+    hooks/
+      useCountUp.ts         ← animação de contadores com IntersectionObserver
 public/
-  logo.svg
-tailwind.config.ts
-CLAUDE.md
+  logotiporyze.png
+  DNA.gif                   ← background animado do Hero
 ```
 
-## Paleta de Cores
+## Paleta de Cores (globals.css @theme)
 ```
---bg:      #0A0F1E   (fundo principal)
---surface: #0F1729   (cards, surfaces)
---blue:    #3B82F6   (accent primário, CTAs)
---cyan:    #06B6D4   (accent secundário, gradientes)
---border:  #1E293B   (bordas e divisores)
---text:    #F8FAFC   (texto principal)
---muted:   #94A3B8   (texto secundário)
-```
+/* Seções claras (Diferenciais, Sobre) */
+--color-ryze-bg:      #FFFFFF
+--color-ryze-surface: #f8fbf9
+--color-ryze-mint:    #daf1de
+--color-ryze-accent:  #0c4a34
+--color-ryze-cta:     #4a8b71
+--color-ryze-border:  #d4e5d8
+--color-ryze-text:    #0c4a34
+--color-ryze-muted:   #5f8872
 
-No tailwind.config.ts estão mapeadas como `ryze.bg`, `ryze.surface`, `ryze.blue`, `ryze.cyan`, `ryze.border`.
+/* Seções escuras (Hero, Processo, Portfolio, Contato, Footer) */
+--color-ryze-dark:         #0A1A0F
+--color-ryze-green:        #40916C
+--color-ryze-forest:       #1B4332
+--color-ryze-forest-hover: #2D6A4F
+```
 
 ## Tipografia
-- **Display / Títulos:** Syne (Google Fonts) — `font-display`
-- **Body / Textos:** DM Sans (Google Fonts) — `font-body`
-- **Mono / Labels técnicos:** JetBrains Mono — `font-mono`
+- **Display / Títulos:** Syne — `font-display` — usar com `font-black uppercase tracking-tight`
+- **Body / Textos:** DM Sans — `font-body`
+- **Mono / Labels:** JetBrains Mono — `font-mono` — usar em badges, labels técnicos
 
-## Padrão Visual (manter consistente em todos os componentes)
+## Seções (ordem no page.tsx)
+1. `<Navbar />` — sticky, blur ao scroll, links: Serviços / Sobre / Processo / Contato
+2. `<Hero />` — fundo escuro (#0A1A0F), DNA.gif, headline grande, 2 stat cards, CTA
+3. `<Marquee />` — faixa verde (#0c4a34) com palavras-chave animadas
+4. `<Diferenciais />` — fundo branco, grid 3 colunas, 6 cards com TiltCard
+5. `<Processo />` — fundo escuro, timeline vertical animada com scroll (5 etapas)
+6. `<Portfolio />` — fundo escuro, iframe preview dos 3 clientes (Clarissa, Mayara, Simone)
+7. `<Sobre />` — fundo branco, texto + 4 stats com countUp (50+, 12+, 3, 20+)
+8. `<Contato />` — fundo escuro, formulário de diagnóstico gratuito (5 campos)
+9. `<Footer />` — fundo escuro, links, WhatsApp, Instagram
 
-### Cards
+## Formulário de Contato
+- Campos: Nome completo, WhatsApp, Faturamento mensal, Pacientes por mês, Já tem site?
+- Endpoint: POST `/api/contact`
+- Envia email via **Resend** para `agenciaaryze@gmail.com`
+- Variáveis de ambiente necessárias na Vercel:
+  - `RESEND_API_KEY` — chave da API do Resend
+  - `CONTACT_EMAIL` — email destino (agenciaaryze@gmail.com)
+
+## Portfólio (clientes reais)
+- Clarissa Cunha — https://clarissacunhanutricionista.com.br — +180% leads orgânicos
+- Mayara Della Costa — https://mayaradellacosta.com.br — 3x agendamentos
+- Simone Ramaldes — https://simoneramaldesnutri.com.br — 60% redução administrativa
+
+## Padrões de Código
+
+### Animações (usar sempre)
 ```tsx
-className="bg-ryze-surface border border-ryze-border rounded-2xl
-           backdrop-blur-md hover:border-ryze-blue/40
-           transition-all duration-300 hover:scale-[1.02]"
-```
+import { fadeUp, stagger08, smoothTransition } from '@/lib/animations'
 
-### Glassmorphism
-```tsx
-className="bg-white/[0.03] border border-white/[0.08]
-           backdrop-blur-md rounded-2xl"
-```
-
-### Gradiente de texto (headlines)
-```tsx
-className="bg-gradient-to-r from-white to-ryze-cyan
-           bg-clip-text text-transparent"
-```
-
-### Botão primário (CTA)
-```tsx
-className="bg-ryze-blue hover:bg-blue-500 text-white
-           px-6 py-3 rounded-xl font-semibold
-           transition-all duration-200 hover:shadow-lg
-           hover:shadow-ryze-blue/25"
-```
-
-### Botão secundário
-```tsx
-className="border border-ryze-border hover:border-ryze-blue/60
-           text-white px-6 py-3 rounded-xl font-semibold
-           transition-all duration-200"
-```
-
-## Animações (Framer Motion)
-
-### Padrão de entrada (usar em todos os componentes)
-```tsx
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
-}
-
-// Wrapper da seção
 <motion.div
   initial="hidden"
   whileInView="visible"
-  viewport={{ once: true, margin: '-80px' }}
-  variants={fadeUp}
+  viewport={{ once: true, amount: 0.05 }}
+  variants={stagger08}
 >
+  <motion.div variants={fadeUp} transition={smoothTransition}>
+    ...
+  </motion.div>
+</motion.div>
 ```
 
-### Stagger para listas de cards
+### Seção escura padrão
 ```tsx
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } }
-}
+<section className="relative bg-[#0A1A0F] px-6 py-24 lg:px-16 lg:py-32 overflow-hidden">
 ```
 
-## Seções (ordem no page.tsx)
-1. `<Navbar />` — sticky, blur ao scroll
-2. `<Hero />` — id="hero"
-3. `<Sobre />` — id="sobre"
-4. `<Servicos />` — id="servicos"
-5. `<Processo />` — id="processo"
-6. `<Diferenciais />` — id="diferenciais"
-7. `<Contato />` — id="contato"
-8. `<Footer />`
+### Seção clara padrão
+```tsx
+<section className="relative px-6 py-28 lg:px-8 lg:py-36">
+```
 
-## Copy de Referência
+### Badge / label de seção
+```tsx
+<span className="font-mono text-xs uppercase tracking-[0.3em] text-white/40">
+  Label da seção
+</span>
+```
 
-### Hero
-- Headline: "Tecnologia que transforma como a saúde opera."
-- Subheadline: "Criamos sites, sistemas e SmartPages para clínicas e profissionais de saúde que querem crescer com inteligência."
-- CTA principal: "Começar agora" → scroll para #contato
-- CTA secundário: "Ver serviços" → scroll para #servicos
-- Métricas: "12+ clientes atendidos" · "3 produtos" · "Entrega em semanas"
-
-### Serviços (3 cards)
-- **Sites** — "Presença digital que converte" — Sites institucionais e landing pages com design premium, otimizados para SEO e para o fluxo do seu negócio de saúde.
-- **SmartPages** — "Uma página. Um sistema completo." — Combinamos site e sistema em uma solução integrada: agendamento, captação, automações — tudo no mesmo lugar.
-- **Sistemas** — "Tecnologia sob medida" — Integrações e sistemas customizados para as necessidades operacionais da sua clínica ou consultório.
-
-### Processo (4 etapas)
-1. Diagnóstico — Entendemos seu negócio, público e objetivos
-2. Proposta — Solução com escopo e prazo claros
-3. Desenvolvimento — Construímos com agilidade, você acompanha
-4. Entrega + Suporte — Lançamos, treinamos e ficamos do seu lado
-
-### Diferenciais (6 cards)
-- Especialistas em saúde
-- Entrega rápida
-- Design de alto nível
-- Stack moderna
-- Foco em conversão
-- Parceria contínua
-
-### Contato
-- Título: "Pronto para elevar seu negócio de saúde?"
-- Sub: "Fale com a gente. Sem compromisso."
-- Campos: Nome · E-mail · WhatsApp · Tipo de projeto (dropdown) · Mensagem
+### Headline grande (seções escuras)
+```tsx
+<h2 className="font-display font-black uppercase leading-[0.9] tracking-tight text-[clamp(2rem,6vw,6rem)] text-white">
+```
 
 ## Regras Gerais
-- Todo componente com animação usa `'use client'`
-- Responsivo mobile-first — breakpoints principais: `md:` e `lg:`
-- Navbar mobile: hamburger com drawer animado
-- Formulário: POST para `/api/contact` → salva em tabela `leads` no Supabase
-- Imagens: sempre `next/image` com `lazy` loading
-- Sem bibliotecas de UI (sem shadcn, sem MUI) — tudo Tailwind puro
-- Acessibilidade: aria-labels nos botões, contraste adequado, focus-visible
+- Todo componente com animação ou hook usa `'use client'`
+- Mobile-first — overflow-x: hidden está em html e body (globals.css)
+- Cursor customizado ativo só em desktop (`@media (pointer: fine)`) via ClientShell
+- `content-visibility: auto` NÃO usar na seção Sobre (quebra o IntersectionObserver do countUp)
+- Sem bibliotecas de UI externas — tudo Tailwind puro
+- Imagens: sempre `next/image`
+- MagneticButton e TiltCard têm efeitos mouse-only — degradam graciosamente no mobile
