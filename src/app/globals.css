@@ -1,26 +1,276 @@
 @import "tailwindcss";
 
+@theme {
+  /* Paleta RyzeSystems — White + Forest Green */
+  --color-ryze-bg: #FFFFFF;
+  --color-ryze-surface: #f8fbf9;
+  --color-ryze-mint: #daf1de;
+  --color-ryze-accent: #0c4a34;
+  --color-ryze-cta: #4a8b71;
+  --color-ryze-border: #d4e5d8;
+  --color-ryze-text: #0c4a34;
+  --color-ryze-muted: #5f8872;
+
+  /* Dark hero palette */
+  --color-ryze-dark:         #0A1A0F;
+  --color-ryze-green:        #40916C;
+  --color-ryze-forest:       #1B4332;
+  --color-ryze-forest-hover: #2D6A4F;
+
+  /* Tipografia */
+  --font-display: var(--font-syne);
+  --font-body: var(--font-dm-sans);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fbf9;
+  --foreground: #0c4a34;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* -- Base ---------------------------------------- */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-dm-sans), sans-serif;
+  background-image: radial-gradient(circle, rgba(212, 229, 216, 0.55) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Hide default cursor on desktop — custom cursor replaces it */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+
+/* -- Scrollbar ----------------------------------- */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c8dece;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4a8b71;
+}
+
+/* -- Selection ----------------------------------- */
+
+::selection {
+  background: rgba(74, 139, 113, 0.18);
+  color: #0c4a34;
+}
+
+/* -- Focus visible ------------------------------- */
+
+*:focus-visible {
+  outline: 2px solid #4a8b71;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* -- Keyframes ----------------------------------- */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes reveal-up {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* -- Animation utilities ------------------------- */
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes text-glow {
+  0%, 100% { text-shadow: 0 0 0px rgba(64,145,108,0); }
+  50%       { text-shadow: 0 0 24px rgba(64,145,108,0.55); }
+}
+
+.text-glow-pulse {
+  animation: text-glow 4.5s ease-in-out infinite;
+}
+
+/* -- Reduced motion ------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-marquee,
+  .animate-shimmer,
+  .animate-pulse-dot,
+  .animate-ping,
+  .animate-pulse,
+  .text-glow-pulse {
+    animation: none;
+  }
+}
+
+/* -- Horizontal rule ----------------------------- */
+
+.hr-glow {
+  height: 1px;
+  border: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(74, 139, 113, 0.12) 30%,
+    rgba(74, 139, 113, 0.22) 50%,
+    rgba(74, 139, 113, 0.12) 70%,
+    transparent 100%
+  );
+}
+
+/* -- Section separator line ---------------------- */
+
+.section-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 229, 216, 0.9), transparent);
+}
+
+/* -- Section backgrounds ------------------------- */
+
+/* Icy white — subtle contrast for alternating sections */
+.section-icy {
+  background: rgba(248, 251, 249, 0.88);
+}
+
+/* Verde n\u00e9voa — accent sections (depoimentos, highlights) */
+.section-mint {
+  background: #daf1de;
+}
+
+/* Dark forest — hero, footer */
+.section-dark {
+  background: #0c4a34;
+  color: #f0faf3;
+}
+
+/* -- Content visibility for below-fold sections -- */
+
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+/* Subtle grid overlay for dark sections */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* -- DNA GIF filter ------------------------------ */
+
+.dna-gif {
+  filter: hue-rotate(0deg) saturate(1.2) brightness(1.1);
+}
+
+/* -- Hero section -------------------------------- */
+
+/* Dot grid overlay for hero background */
+.hero-dots {
+  background-image: radial-gradient(circle, rgba(12, 74, 52, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* White dots for dark sections (SocialProof, panels) */
+.panel-dots {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Mouse spotlight — follows cursor via CSS vars set with setProperty */
+.hero-spotlight {
+  background: radial-gradient(600px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(64, 145, 108, 0.10), transparent 70%);
+}
+
+/* Mouse-interactive glow — position driven by CSS vars set via setProperty */
+.hero-mouse-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(64, 145, 108, 0.12) 0%, transparent 70%);
+  filter: blur(80px);
+  transition: transform 0.8s ease;
+  transform: translate(var(--glow-x, -250px), var(--glow-y, -250px));
+}
+
+/* Floating particles — timing driven by CSS custom props per element */
+.hero-particle {
+  position: absolute;
+  border-radius: 50%;
+  top: var(--p-top);
+  left: var(--p-left);
+  width: var(--p-size);
+  height: var(--p-size);
+  animation-name: float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-delay: var(--p-delay, 0s);
+  animation-duration: var(--p-dur, 6s);
+}
+
+/* -- Select option colors (dark theme) ----------- */
+
+select option {
+  background: #0A1A0F;
+  color: #ffffff;
+}
+
+select option:disabled {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* -- Noise texture overlay ----------------------- */
+.hero-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C%2Ffilter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'%2F%3E%3C%2Fsvg%3E");
+  background-size: 200px 200px;
 }
