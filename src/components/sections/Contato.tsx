@@ -38,7 +38,7 @@ export default function Contato() {
   }
 
   return (
-    <section id="contato" className="bg-[#0A0A0A] relative px-6 py-16 lg:px-8 lg:py-36">
+    <section id="contato" className="bg-ryze-dark relative px-6 py-16 lg:px-8 lg:py-36">
 
       <motion.div
         layout={false}

@@ -37,7 +37,7 @@ const others = [
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="relative bg-[#0A0A0A] px-6 py-24 lg:px-16 lg:py-32 overflow-hidden">
+    <section id="portfolio" className="relative bg-ryze-dark px-6 py-24 lg:px-16 lg:py-32 overflow-hidden">
 
       <div className="pointer-events-none absolute inset-0">
         <div className="hidden sm:block absolute top-1/3 right-0 h-[500px] w-[500px] rounded-full bg-[#40916C]/10 blur-[130px]" />

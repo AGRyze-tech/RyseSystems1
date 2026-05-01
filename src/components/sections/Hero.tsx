@@ -59,10 +59,10 @@ export default function Hero() {
           className="dna-gif object-cover mix-blend-screen opacity-[0.18] hidden sm:block"
         />
         {/* Mobile: simpler radial gradient instead of GIF */}
-        <div className="sm:hidden absolute inset-0 bg-gradient-to-br from-[#40916C]/[0.06] via-transparent to-transparent" />
+        <div className="sm:hidden absolute inset-0 bg-gradient-to-br from-ryze-green/[0.06] via-transparent to-transparent" />
 
         {/* Corner glow — top right, desktop only (large blur too expensive on mobile GPUs) */}
-        <div className="hidden sm:block absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#40916C]/[0.07] blur-[120px]" />
+        <div className="hidden sm:block absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-ryze-green/[0.07] blur-[120px]" />
 
         {/* Dot grid */}
         <div className="hero-dots absolute inset-0 opacity-[0.035]" />
@@ -123,7 +123,7 @@ export default function Hero() {
               role="button"
               tabIndex={0}
               aria-label={`${s.value} ${s.label} — ${s.cta}`}
-              className="group relative bg-[#111111] rounded-2xl p-4 sm:p-6 flex-1 min-w-0 flex flex-col justify-between overflow-hidden cursor-pointer hover:bg-[#1A1A1A] transition-colors duration-300"
+              className="group relative bg-[#111111] rounded-2xl p-4 sm:p-6 flex-1 min-w-0 flex flex-col justify-between overflow-hidden cursor-pointer hover:bg-ryze-forest transition-colors duration-300"
               onClick={() => scrollTo(s.href)}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollTo(s.href) } }}
             >

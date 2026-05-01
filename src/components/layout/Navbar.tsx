@@ -55,7 +55,7 @@ export default function Navbar() {
 
   // Navbar background style — 3 states: overlay open / scrolled / transparent
   const navBg = mobileOpen
-    ? 'bg-[#0A0A0A] border border-white/[0.06]'
+    ? 'bg-ryze-dark border border-white/[0.06]'
     : scrolled
     ? 'bg-white md:bg-white/95 md:backdrop-blur-xl border border-black/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.06)]'
     : 'bg-transparent border border-transparent'
@@ -128,7 +128,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => handleNav('#contato')}
-              className="hidden md:inline-flex items-center gap-2 bg-[#0A0A0A] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#333333] hover:shadow-[0_0_20px_rgba(0,0,0,0.15)] transition-all duration-200 group shrink-0"
+              className="hidden md:inline-flex items-center gap-2 bg-ryze-dark text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#333333] hover:shadow-[0_0_20px_rgba(0,0,0,0.15)] transition-all duration-200 group shrink-0"
             >
               Começar agora
               <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-0.5" />

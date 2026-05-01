@@ -164,7 +164,7 @@ function SimpleStepItem({ step, index }: { step: typeof steps[0]; index: number 
         ) : (
           <div className="h-6" />
         )}
-        <div className="h-10 w-10 shrink-0 rounded-full border-2 border-[#40916C] bg-[#40916C]/15 flex items-center justify-center z-10">
+        <div className="h-10 w-10 shrink-0 rounded-full border-2 border-ryze-green bg-ryze-green/15 flex items-center justify-center z-10">
           <span className="font-mono text-[11px] font-bold text-white">{step.number}</span>
         </div>
         {index < steps.length - 1 && (
@@ -211,11 +211,11 @@ export default function Processo() {
   })
 
   return (
-    <section ref={sectionRef} id="processo" className="relative bg-[#0A0A0A] px-6 py-24 lg:px-16 lg:py-32 overflow-hidden">
+    <section ref={sectionRef} id="processo" className="relative bg-ryze-dark px-6 py-24 lg:px-16 lg:py-32 overflow-hidden">
 
       {/* Background */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="hidden sm:block absolute bottom-0 left-1/4 h-[500px] w-[500px] rounded-full bg-[#40916C]/[0.07] blur-[130px]" />
+        <div className="hidden sm:block absolute bottom-0 left-1/4 h-[500px] w-[500px] rounded-full bg-ryze-green/[0.07] blur-[130px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl">
@@ -244,19 +244,19 @@ export default function Processo() {
 
         {/* Steps */}
         <div>
-          {steps.map((step, i) => (
-            <React.Fragment key={step.number}>
-              {!isDesktop && <SimpleStepItem step={step} index={i} />}
-              {isDesktop && (
-                <ScrollStepItem
-                  step={step}
-                  index={i}
-                  stepRef={stepRefs.current[i]}
-                  sectionProgress={sectionProgress}
-                />
-              )}
-            </React.Fragment>
-          ))}
+          {steps.map((step, i) =>
+            isDesktop ? (
+              <ScrollStepItem
+                key={step.number}
+                step={step}
+                index={i}
+                stepRef={stepRefs.current[i]}
+                sectionProgress={sectionProgress}
+              />
+            ) : (
+              <SimpleStepItem key={step.number} step={step} index={i} />
+            )
+          )}
         </div>
 
       </div>
