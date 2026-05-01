@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* Paleta RyzeSystems — White + Forest Green */
+  /* Paleta RyzeSystems — Black & White + Green accent */
   --color-ryze-bg: #FFFFFF;
-  --color-ryze-surface: #f8fbf9;
+  --color-ryze-surface: #F8F8F8;
   --color-ryze-mint: #daf1de;
   --color-ryze-accent: #0c4a34;
-  --color-ryze-cta: #4a8b71;
-  --color-ryze-border: #d4e5d8;
-  --color-ryze-text: #0c4a34;
-  --color-ryze-muted: #5f8872;
+  --color-ryze-cta: #40916C;
+  --color-ryze-border: #E5E5E5;
+  --color-ryze-text: #0A0A0A;
+  --color-ryze-muted: #6B7280;
 
-  /* Dark hero palette */
-  --color-ryze-dark:         #0A1A0F;
+  /* Dark palette */
+  --color-ryze-dark:         #0A0A0A;
   --color-ryze-green:        #40916C;
-  --color-ryze-forest:       #1B4332;
+  --color-ryze-forest:       #1A1A1A;
   --color-ryze-forest-hover: #2D6A4F;
 
   /* Tipografia */
@@ -24,14 +24,17 @@
 }
 
 :root {
-  --background: #f8fbf9;
-  --foreground: #0c4a34;
+  --background: #FFFFFF;
+  --foreground: #0A0A0A;
 }
 
 /* -- Base ---------------------------------------- */
 
 html {
   overflow-x: hidden;
+  /* Prevent font size inflation on orientation change (iOS/Android) */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -40,8 +43,10 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-dm-sans), sans-serif;
-  background-image: radial-gradient(circle, rgba(212, 229, 216, 0.55) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 28px 28px;
+  /* Remove gray flash on tap in iOS/Android */
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Eliminate 300ms tap delay on interactive elements */
@@ -68,7 +73,7 @@ a, button, [role="button"], input, select, textarea {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c8dece;
+  background: #D1D5DB;
   border-radius: 3px;
 }
 
@@ -107,6 +112,7 @@ a, button, [role="button"], input, select, textarea {
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+  will-change: transform;
 }
 
 @keyframes text-glow {
@@ -120,12 +126,42 @@ a, button, [role="button"], input, select, textarea {
 
 /* -- Reduced motion ------------------------------ */
 
+/* -- CTA Border Beam ------------------------------ */
+
+@keyframes beam-spin {
+  from { rotate: 0deg; }
+  to   { rotate: 360deg; }
+}
+
+.cta-border-beam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  aspect-ratio: 1 / 1;
+  /* Static centering via individual transform property — keeps rotation Composite-only */
+  translate: -50% -50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent      0deg,
+    transparent      68deg,
+    rgba(152,255,196,0.7) 115deg,
+    rgba(64,145,108,1)    155deg,
+    rgba(64,145,108,0.45) 195deg,
+    transparent      248deg,
+    transparent      360deg
+  );
+  animation: beam-spin 3s linear infinite;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .hero-particle,
   .animate-ping,
   .animate-pulse,
-  .text-glow-pulse {
+  .text-glow-pulse,
+  .cta-border-beam {
     animation: none;
   }
 }
@@ -164,10 +200,10 @@ a, button, [role="button"], input, select, textarea {
   background: #daf1de;
 }
 
-/* Dark forest — hero, footer */
+/* Dark — hero, footer */
 .section-dark {
-  background: #0c4a34;
-  color: #f0faf3;
+  background: #111111;
+  color: #F8F8F8;
 }
 
 /* -- Content visibility for below-fold sections -- */
@@ -195,7 +231,7 @@ a, button, [role="button"], input, select, textarea {
 
 /* Dot grid overlay for hero background */
 .hero-dots {
-  background-image: radial-gradient(circle, rgba(12, 74, 52, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -242,12 +278,28 @@ a, button, [role="button"], input, select, textarea {
 /* -- Select option colors (dark theme) ----------- */
 
 select option {
-  background: #0A1A0F;
+  background: #0A0A0A;
   color: #ffffff;
 }
 
 select option:disabled {
   color: rgba(255, 255, 255, 0.4);
+}
+
+/* -- Portfolio ----------------------------------- */
+
+/* Dot grid for mobile portfolio card placeholders */
+.portfolio-dots {
+  background-image: radial-gradient(circle, rgba(64, 145, 108, 0.4) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* iframe scaled to 50% inside a 2x container */
+.iframe-scaled {
+  transform: scale(0.5);
+  transform-origin: top left;
+  width: 200%;
+  height: 200%;
 }
 
 /* -- Noise texture overlay ----------------------- */

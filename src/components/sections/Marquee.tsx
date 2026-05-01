@@ -30,9 +30,9 @@ function MarqueeRow() {
 
 export default function Marquee() {
   return (
-    <div className="relative overflow-hidden bg-ryze-accent py-[18px]">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-ryze-accent to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-ryze-accent to-transparent" />
+    <div className="relative overflow-hidden bg-[#0A0A0A] py-[18px]">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#0A0A0A] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#0A0A0A] to-transparent" />
       <div className="flex animate-marquee gap-12">
         <MarqueeRow />
         <MarqueeRow />

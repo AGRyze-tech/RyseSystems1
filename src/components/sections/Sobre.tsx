@@ -1,7 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { fadeUp, stagger12, smoothTransition } from '@/lib/animations'
 import { useCountUp } from '@/lib/hooks/useCountUp'
 
@@ -17,7 +16,7 @@ function StatRow({ stat, isLast }: { stat: typeof stats[number]; isLast: boolean
   return (
     <div className={`group flex items-end justify-between border-t border-ryze-border/40 py-5 lg:py-7 transition-colors duration-500 hover:border-ryze-accent/20 ${isLast ? 'border-b border-ryze-border/40' : ''}`}>
       <span className="font-mono text-xs uppercase tracking-widest text-ryze-muted/50">{stat.label}</span>
-      <span className="font-display text-4xl font-extrabold leading-none text-ryze-accent transition-colors duration-300 group-hover:text-ryze-cta md:text-6xl">
+      <span className="font-display text-4xl font-extrabold leading-none text-[#40916C] transition-colors duration-300 group-hover:text-[#2D6A4F] md:text-6xl">
         <span ref={elRef}>{count}{stat.suffix}</span>
       </span>
     </div>
@@ -25,15 +24,8 @@ function StatRow({ stat, isLast }: { stat: typeof stats[number]; isLast: boolean
 }
 
 export default function Sobre() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  })
-  const glowY = useTransform(scrollYProgress, [0, 1], [80, -80])
-
   return (
-    <section ref={sectionRef} id="sobre" className="bg-white border-t border-ryze-border/30 relative px-6 py-16 lg:px-8 lg:py-36">
+    <section id="sobre" className="bg-white border-t border-ryze-border/30 relative px-6 py-16 lg:px-8 lg:py-36">
 
       <motion.div
         layout={false}
@@ -54,7 +46,7 @@ export default function Sobre() {
               </span>
             </span>
 
-            <h2 className="font-display text-3xl font-extrabold leading-[1.05] tracking-tight text-ryze-accent md:text-5xl lg:text-[3.5rem]">
+            <h2 className="font-display text-3xl font-extrabold leading-[1.05] tracking-tight text-[#0A0A0A] md:text-5xl lg:text-[3.5rem]">
               Construímos{' '}
               <span className="bg-gradient-to-r from-ryze-accent to-ryze-cta bg-clip-text text-transparent">
                 o futuro

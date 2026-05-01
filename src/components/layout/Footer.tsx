@@ -9,9 +9,9 @@ import { scrollTo } from '@/lib/scrollTo'
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#0A1A0F] px-6 pt-20 pb-28 md:pb-10 lg:px-8 overflow-hidden">
+    <footer className="relative bg-[#0A0A0A] px-6 pt-20 pb-28 md:pb-10 lg:px-8 overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 h-[700px] w-[700px] rounded-full bg-[#1B4332]/20 blur-[140px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 h-[700px] w-[700px] rounded-full bg-[#40916C]/[0.05] blur-[140px]" />
       </div>
       <motion.div
         initial="hidden"
@@ -22,7 +22,7 @@ export default function Footer() {
       >
         {/* CTA banner */}
         <motion.div variants={fadeUp} className="mb-16 text-center">
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-ryze-mint/30 mb-6 block">
+          <span className="font-mono text-xs uppercase tracking-[0.3em] text-white/30 mb-6 block">
             Próximo passo
           </span>
           <h3 className="font-display font-black uppercase text-white leading-[0.9] tracking-tight text-[clamp(3rem,8vw,7rem)]">
@@ -31,7 +31,7 @@ export default function Footer() {
               juntos.
             </span>
           </h3>
-          <p className="mt-6 text-ryze-mint/50 text-lg max-w-md mx-auto leading-relaxed">
+          <p className="mt-6 text-white/40 text-lg max-w-md mx-auto leading-relaxed">
             Seu projeto começa com uma conversa.
           </p>
           <MagneticButton

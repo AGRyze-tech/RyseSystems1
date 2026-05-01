@@ -44,23 +44,25 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen flex flex-col justify-between bg-ryze-dark pt-24 pb-12 px-5 sm:px-8 lg:px-16 overflow-hidden"
+      className="relative min-h-[100dvh] flex flex-col justify-start sm:justify-between bg-ryze-dark pt-24 pb-12 px-5 sm:px-8 lg:px-16 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* Background effects */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* DNA GIF — fundo completo */}
+        {/* DNA GIF — desktop only (GIF + mix-blend-screen is too heavy for mobile GPUs) */}
         <Image
           src="/DNA.gif"
           alt=""
           aria-hidden="true"
           fill
           unoptimized
-          className="dna-gif object-cover mix-blend-screen opacity-[0.18]"
+          className="dna-gif object-cover mix-blend-screen opacity-[0.18] hidden sm:block"
         />
+        {/* Mobile: simpler radial gradient instead of GIF */}
+        <div className="sm:hidden absolute inset-0 bg-gradient-to-br from-[#40916C]/[0.06] via-transparent to-transparent" />
 
-        {/* Corner glow — top right */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-ryze-forest/40 blur-[120px]" />
+        {/* Corner glow — top right, desktop only (large blur too expensive on mobile GPUs) */}
+        <div className="hidden sm:block absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#40916C]/[0.07] blur-[120px]" />
 
         {/* Dot grid */}
         <div className="hero-dots absolute inset-0 opacity-[0.035]" />
@@ -68,12 +70,12 @@ export default function Hero() {
         {/* Mouse-interactive spotlight */}
         <div className="hero-spotlight pointer-events-none absolute inset-0 transition-opacity duration-300" />
 
-        {/* Floating particles — CSS custom props require inline style; no alternative */}
+        {/* Floating particles — desktop only (each particle = GPU layer) */}
         {particles.map((p, i) => (
           // eslint-disable-next-line react/forbid-dom-props
           <div
             key={i}
-            className={`hero-particle ${p.color}`}
+            className={`hero-particle ${p.color} hidden sm:block`}
             style={{
               '--p-top': p.top,
               '--p-left': p.left,
@@ -84,8 +86,8 @@ export default function Hero() {
           />
         ))}
 
-        {/* Noise texture overlay */}
-        <div className="hero-noise absolute inset-0 opacity-[0.03]" />
+        {/* Noise texture overlay — desktop only (SVG turbulence filter expensive on mobile) */}
+        <div className="hero-noise absolute inset-0 opacity-[0.03] hidden sm:block" />
       </div>
 
       {/* Headline — top left */}
@@ -94,7 +96,7 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={stagger12}
-          className="font-display font-black uppercase leading-[0.9] tracking-tight text-[clamp(2.2rem,6vw,7rem)]"
+          className="font-display font-black uppercase leading-[1.05] tracking-[0.01em] text-[clamp(2.4rem,7vw,8rem)]"
         >
           <motion.span className="block text-white" variants={lineVariants}>Tecnologia</motion.span>
           <motion.span className="block text-white" variants={lineVariants}>que transforma</motion.span>
@@ -109,7 +111,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.9 }}
-        className="relative z-10 flex flex-col gap-6 mt-8"
+        className="relative z-10 flex flex-col gap-6 mt-10 sm:mt-8"
       >
         <div className="flex gap-3 w-full max-w-[420px]">
           {[
@@ -121,7 +123,7 @@ export default function Hero() {
               role="button"
               tabIndex={0}
               aria-label={`${s.value} ${s.label} — ${s.cta}`}
-              className="group relative bg-[#111F14] rounded-2xl p-4 sm:p-6 flex-1 min-w-0 flex flex-col justify-between overflow-hidden cursor-pointer hover:bg-[#162219] transition-colors duration-300"
+              className="group relative bg-[#111111] rounded-2xl p-4 sm:p-6 flex-1 min-w-0 flex flex-col justify-between overflow-hidden cursor-pointer hover:bg-[#1A1A1A] transition-colors duration-300"
               onClick={() => scrollTo(s.href)}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollTo(s.href) } }}
             >
@@ -151,19 +153,24 @@ export default function Hero() {
           ))}
         </div>
 
-        <div className="flex flex-col items-start gap-4 max-w-full text-left">
+        <div className="flex flex-col items-start gap-5 max-w-full text-left">
           <p className="text-white/65 text-sm leading-relaxed">
             Criamos sites, sistemas e SmartPages para clínicas e profissionais de saúde que querem crescer com inteligência.
           </p>
-          <button
-            type="button"
-            onClick={() => scrollTo('#contato')}
-            className="group relative overflow-hidden bg-ryze-green text-white px-7 py-3.5 rounded-xl text-sm font-semibold flex items-center gap-2 hover:bg-ryze-forest-hover hover:shadow-[0_0_30px_rgba(64,145,108,0.4)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300"
-          >
-            <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none" />
-            Solicitar diagnóstico
-            <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
-          </button>
+          {/* CTA com border beam */}
+          <div className="relative group w-full rounded-2xl p-[1.5px] bg-[#40916C]/25 overflow-hidden">
+            {/* Rotating beam */}
+            <div aria-hidden="true" className="cta-border-beam hidden sm:block" />
+            <button
+              type="button"
+              onClick={() => scrollTo('#contato')}
+              className="relative z-10 w-full flex items-center justify-center gap-2 bg-ryze-green text-white px-7 py-4 rounded-[14px] text-sm font-bold tracking-wide hover:bg-ryze-forest-hover active:scale-[0.98] transition-all duration-300 overflow-hidden"
+            >
+              <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none" />
+              Solicitar diagnóstico
+              <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
+          </div>
         </div>
       </motion.div>
 
@@ -172,7 +179,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-20 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-5 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <div className="h-8 w-px bg-gradient-to-b from-transparent to-white/10" />
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/20">Scroll</span>

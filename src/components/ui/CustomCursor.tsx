@@ -78,8 +78,8 @@ export default function CustomCursor() {
     window.addEventListener('mousemove', onMove, { passive: true })
     document.addEventListener('mouseover', onOver, { passive: true })
     document.addEventListener('mouseout', onOut, { passive: true })
-    document.addEventListener('mouseleave', onLeave)
-    document.addEventListener('mouseenter', onEnter)
+    document.addEventListener('mouseleave', onLeave, { passive: true })
+    document.addEventListener('mouseenter', onEnter, { passive: true })
 
     return () => {
       window.removeEventListener('mousemove', onMove)

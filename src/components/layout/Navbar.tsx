@@ -53,6 +53,23 @@ export default function Navbar() {
     scrollToSection(href)
   }, [])
 
+  // Navbar background style — 3 states: overlay open / scrolled / transparent
+  const navBg = mobileOpen
+    ? 'bg-[#0A0A0A] border border-white/[0.06]'
+    : scrolled
+    ? 'bg-white md:bg-white/95 md:backdrop-blur-xl border border-black/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.06)]'
+    : 'bg-transparent border border-transparent'
+
+  // Logo text color
+  const logoColor = mobileOpen || !scrolled ? 'text-white' : 'text-[#0A0A0A]'
+
+  // Hamburger button style
+  const btnColor = mobileOpen
+    ? 'text-white/70 hover:text-white hover:bg-white/[0.06]'
+    : scrolled
+    ? 'text-[#111111]/70 hover:text-[#111111] hover:bg-black/[0.04]'
+    : 'text-white/80 hover:text-white hover:bg-white/[0.08]'
+
   return (
     <>
       {/* ── Floating navbar ──────────────────────────────── */}
@@ -61,11 +78,7 @@ export default function Navbar() {
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className={`w-full max-w-4xl rounded-2xl transition-all duration-500 ${
-            scrolled
-              ? 'bg-white/90 backdrop-blur-xl border border-ryze-accent/10 shadow-[0_4px_24px_rgba(12,74,52,0.08)]'
-              : 'bg-transparent border border-transparent'
-          }`}
+          className={`w-full max-w-4xl rounded-2xl transition-all duration-300 ${navBg}`}
         >
           <div className="flex items-center justify-between px-5 py-3">
 
@@ -84,7 +97,7 @@ export default function Navbar() {
                 priority
                 className="h-8 w-8"
               />
-              <span className={`font-display text-[15px] font-bold hidden sm:block transition-colors duration-500 ${scrolled ? 'text-ryze-accent' : 'text-white'}`}>
+              <span className={`font-display text-[15px] font-bold hidden sm:block transition-colors duration-300 ${logoColor}`}>
                 Ryze<span className="text-ryze-green">.</span>
               </span>
             </a>
@@ -99,8 +112,8 @@ export default function Navbar() {
                   className={`relative px-4 py-1.5 rounded-full text-sm transition-all duration-200 ${
                     scrolled
                       ? activeSection === link.href
-                        ? 'bg-ryze-accent/[0.08] text-ryze-accent font-medium'
-                        : 'text-ryze-accent/55 hover:text-ryze-accent'
+                        ? 'bg-black/[0.06] text-[#0A0A0A] font-medium'
+                        : 'text-[#111111]/55 hover:text-[#0A0A0A]'
                       : activeSection === link.href
                         ? 'bg-white/[0.08] text-white font-medium'
                         : 'text-white/60 hover:text-white'
@@ -115,20 +128,45 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => handleNav('#contato')}
-              className="hidden md:inline-flex items-center gap-2 bg-ryze-accent text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-ryze-forest-hover hover:shadow-[0_0_20px_rgba(27,67,50,0.2)] transition-all duration-200 group shrink-0"
+              className="hidden md:inline-flex items-center gap-2 bg-[#0A0A0A] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#333333] hover:shadow-[0_0_20px_rgba(0,0,0,0.15)] transition-all duration-200 group shrink-0"
             >
               Começar agora
               <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-0.5" />
             </button>
 
-            {/* Mobile hamburger */}
+            {/* Mobile hamburger / close */}
             <button
               type="button"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden flex items-center justify-center h-11 w-11 rounded-lg text-ryze-accent/70 hover:text-ryze-accent hover:bg-ryze-accent/[0.06] transition-colors"
+              onClick={() => setMobileOpen(prev => !prev)}
+              className={`md:hidden flex items-center justify-center h-10 w-10 rounded-lg transition-colors duration-200 ${btnColor}`}
               aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
+              aria-expanded={mobileOpen ? 'true' : 'false'}
             >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileOpen ? (
+                  <motion.span
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className="flex"
+                  >
+                    <X size={20} />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className="flex"
+                  >
+                    <Menu size={20} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </button>
           </div>
         </motion.nav>
@@ -141,26 +179,11 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
             className="fixed inset-0 z-40 bg-ryze-dark md:hidden flex flex-col"
           >
-            {/* Header row */}
-            <div className="flex items-center justify-between px-6 h-20 border-b border-ryze-border/40">
-              <div className="flex items-center gap-2.5">
-                <Image src="/logotiporyse.png" alt="RyzeSystems" width={32} height={32} className="h-8 w-8" />
-                <span className="font-display text-[15px] font-bold text-white">
-                  Ryze<span className="text-ryze-green">.</span>
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setMobileOpen(false)}
-                className="h-11 w-11 rounded-lg flex items-center justify-center text-ryze-muted hover:text-ryze-accent transition-colors"
-                aria-label="Fechar menu"
-              >
-                <X size={20} />
-              </button>
-            </div>
+            {/* Espaço reservado para o navbar (aprox. top-4 + altura do nav) */}
+            <div className="h-20 shrink-0" />
 
             {/* Nav links */}
             <div className="flex flex-1 flex-col justify-center px-10 gap-1">
@@ -171,13 +194,13 @@ export default function Navbar() {
                   onClick={(e) => { e.preventDefault(); handleNav(link.href) }}
                   initial={{ opacity: 0, x: -24 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.08 + i * 0.07, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="group flex items-center justify-between border-b border-ryze-border/40 py-5"
+                  transition={{ delay: 0.06 + i * 0.07, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="group flex items-center justify-between border-b border-white/[0.06] py-5"
                 >
                   <span className="font-display text-3xl font-extrabold text-white transition-colors duration-300 group-hover:text-ryze-green">
                     {link.label}
                   </span>
-                  <span className="font-mono text-xs text-ryze-border">0{i + 1}</span>
+                  <span className="font-mono text-xs text-white/20">0{i + 1}</span>
                 </motion.a>
               ))}
             </div>
@@ -186,18 +209,18 @@ export default function Navbar() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.45 }}
+              transition={{ delay: 0.4 }}
               className="px-10 pb-10"
             >
-              <div className="section-line mb-5" />
+              <div className="h-px bg-white/[0.06] mb-5" />
               <button
                 type="button"
                 onClick={() => handleNav('#contato')}
-                className="w-full bg-ryze-accent text-white py-4 rounded-xl font-semibold text-base hover:bg-[#2D6A4F] transition-colors"
+                className="w-full bg-ryze-green text-white py-4 rounded-xl font-semibold text-base hover:bg-ryze-forest-hover transition-colors active:scale-[0.98]"
               >
                 Começar agora
               </button>
-              <p className="font-mono text-xs text-ryze-muted/40 tracking-wider mt-4 text-center">
+              <p className="font-mono text-xs text-white/20 tracking-wider mt-4 text-center">
                 {CONTACT_EMAIL}
               </p>
             </motion.div>

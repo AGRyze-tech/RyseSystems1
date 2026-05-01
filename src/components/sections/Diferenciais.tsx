@@ -51,7 +51,7 @@ export default function Diferenciais() {
               transition={smoothTransition}
             >
               <TiltCard className="group flex flex-col rounded-2xl border border-ryze-border bg-white p-8 transition-all duration-500 hover:border-ryze-cta/30 hover:shadow-xl hover:shadow-ryze-cta/[0.05] md:p-10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-ryze-border bg-ryze-surface text-ryze-accent transition-all duration-500 group-hover:border-ryze-cta/40 group-hover:bg-ryze-mint/50">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-ryze-border bg-ryze-surface text-[#111111] transition-all duration-500 group-hover:border-ryze-cta/30 group-hover:bg-[#F3F4F6]">
                   <item.icon size={22} />
                 </div>
 

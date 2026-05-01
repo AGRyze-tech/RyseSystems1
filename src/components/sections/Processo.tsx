@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion'
 
 const steps = [
@@ -34,7 +34,9 @@ const steps = [
 const SPRING_STEP = { stiffness: 80, damping: 25, restDelta: 0.001 } as const
 const SPRING_LINE = { stiffness: 100, damping: 28, restDelta: 0.001 } as const
 
-function StepItem({
+// ── Desktop: scroll-driven step (mantém efeito cinematográfico) ───────────────
+
+function ScrollStepItem({
   step,
   index,
   stepRef,
@@ -110,7 +112,7 @@ function StepItem({
           </motion.span>
         </motion.div>
 
-        {/* Linha abaixo — preenche conforme scroll do próximo step */}
+        {/* Linha abaixo */}
         {index < steps.length - 1 && (
           <div className="relative w-px flex-1 min-h-[120px]">
             <div className="absolute inset-0 bg-white/10" />
@@ -129,9 +131,7 @@ function StepItem({
       {/* Right — conteúdo */}
       <div className="pl-8 pb-10 lg:pb-16 pt-1">
         <motion.div style={{ opacity, x: contentX }}>
-          <motion.h3
-            className="font-display font-black text-2xl lg:text-3xl uppercase tracking-tight text-white"
-          >
+          <motion.h3 className="font-display font-black text-2xl lg:text-3xl uppercase tracking-tight text-white">
             {step.title}
           </motion.h3>
           <motion.p
@@ -146,11 +146,64 @@ function StepItem({
   )
 }
 
+// ── Mobile: whileInView simples (sem scroll-driven springs) ───────────────────
+
+function SimpleStepItem({ step, index }: { step: typeof steps[0]; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -16 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.45, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      className="relative grid grid-cols-[52px_1fr] gap-0 min-h-[120px]"
+    >
+      {/* Coluna da timeline */}
+      <div className="flex flex-col items-center">
+        {index > 0 ? (
+          <div className="w-px h-6 bg-white/15 flex-none" />
+        ) : (
+          <div className="h-6" />
+        )}
+        <div className="h-10 w-10 shrink-0 rounded-full border-2 border-[#40916C] bg-[#40916C]/15 flex items-center justify-center z-10">
+          <span className="font-mono text-[11px] font-bold text-white">{step.number}</span>
+        </div>
+        {index < steps.length - 1 && (
+          <div className="w-px flex-1 bg-white/15 min-h-[80px]" />
+        )}
+      </div>
+
+      {/* Conteúdo */}
+      <div className="pl-5 pb-8 pt-1">
+        <h3 className="font-display font-black text-xl uppercase tracking-tight text-white">
+          {step.title}
+        </h3>
+        <p className="mt-2 text-sm leading-relaxed text-white/50">
+          {step.description}
+        </p>
+      </div>
+    </motion.div>
+  )
+}
+
+// ── Processo ──────────────────────────────────────────────────────────────────
+
 export default function Processo() {
   const stepRefs = useRef<Array<React.RefObject<HTMLDivElement | null>>>(
     steps.map(() => React.createRef<HTMLDivElement>())
   )
   const sectionRef = useRef<HTMLElement>(null)
+
+  // Only mount scroll-driven desktop items after confirming we're on desktop.
+  // CSS display:none does NOT prevent React hooks from running — this prevents
+  // the 5× useScroll/useSpring chains from executing on mobile.
+  const [isDesktop, setIsDesktop] = useState(false)
+  useEffect(() => {
+    const mql = window.matchMedia('(min-width: 768px)')
+    setIsDesktop(mql.matches)
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
+    mql.addEventListener('change', handler)
+    return () => mql.removeEventListener('change', handler)
+  }, [])
 
   const { scrollYProgress: sectionProgress } = useScroll({
     target: sectionRef,
@@ -158,16 +211,16 @@ export default function Processo() {
   })
 
   return (
-    <section ref={sectionRef} id="processo" className="relative bg-[#0A1A0F] px-6 py-24 lg:px-16 lg:py-32 overflow-hidden">
+    <section ref={sectionRef} id="processo" className="relative bg-[#0A0A0A] px-6 py-24 lg:px-16 lg:py-32 overflow-hidden">
 
       {/* Background */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute bottom-0 left-1/4 h-[500px] w-[500px] rounded-full bg-[#1B4332]/30 blur-[130px]" />
+        <div className="hidden sm:block absolute bottom-0 left-1/4 h-[500px] w-[500px] rounded-full bg-[#40916C]/[0.07] blur-[130px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl">
 
-        {/* Header — sticky style */}
+        {/* Header */}
         <div className="mb-12 lg:mb-20 lg:grid lg:grid-cols-[1fr_80px_1fr] lg:gap-0">
           <div className="lg:pr-10">
             <motion.div
@@ -192,13 +245,17 @@ export default function Processo() {
         {/* Steps */}
         <div>
           {steps.map((step, i) => (
-            <StepItem
-              key={step.number}
-              step={step}
-              index={i}
-              stepRef={stepRefs.current[i]}
-              sectionProgress={sectionProgress}
-            />
+            <React.Fragment key={step.number}>
+              {!isDesktop && <SimpleStepItem step={step} index={i} />}
+              {isDesktop && (
+                <ScrollStepItem
+                  step={step}
+                  index={i}
+                  stepRef={stepRefs.current[i]}
+                  sectionProgress={sectionProgress}
+                />
+              )}
+            </React.Fragment>
           ))}
         </div>
 

@@ -18,14 +18,14 @@ export default function StickyCtaBar() {
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="fixed bottom-0 left-0 right-0 z-40 md:hidden"
         >
-          <div className="flex items-center justify-between gap-3 border-t border-ryze-border bg-white/95 px-5 py-4 backdrop-blur-md shadow-[0_-4px_24px_rgba(0,0,0,0.06)]">
+          <div className="flex items-center justify-between gap-3 border-t border-ryze-border bg-white px-5 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[0_-4px_24px_rgba(0,0,0,0.06)]">
             <div className="flex flex-col">
               <span className="text-xs font-medium text-ryze-muted">
                 Pronto para crescer?
               </span>
               <span className="flex items-center gap-1.5 text-[11px] text-ryze-muted/60 font-mono">
                 <span className="h-1.5 w-1.5 rounded-full bg-ryze-cta animate-pulse" />
-                Apenas 3 vagas em Abril
+                Apenas 3 vagas este mês
               </span>
             </div>
             <button
