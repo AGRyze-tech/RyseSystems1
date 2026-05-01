@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef, useCallback } from 'react'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { scrollTo } from '@/lib/scrollTo'
@@ -49,15 +48,17 @@ export default function Hero() {
     >
       {/* Background effects */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* DNA GIF — desktop only (GIF + mix-blend-screen is too heavy for mobile GPUs) */}
-        <Image
-          src="/DNA.gif"
-          alt=""
+        {/* DNA video — desktop only (mix-blend-screen too heavy for mobile GPUs) */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           aria-hidden="true"
-          fill
-          unoptimized
-          className="dna-gif object-cover mix-blend-screen opacity-[0.18] hidden sm:block"
-        />
+          className="dna-gif absolute inset-0 h-full w-full object-cover mix-blend-screen opacity-[0.18] hidden sm:block"
+        >
+          <source src="/DNA.webm" type="video/webm" />
+        </video>
         {/* Mobile: simpler radial gradient instead of GIF */}
         <div className="sm:hidden absolute inset-0 bg-gradient-to-br from-ryze-green/[0.06] via-transparent to-transparent" />
 
