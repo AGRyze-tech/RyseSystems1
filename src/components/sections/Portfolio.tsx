@@ -72,18 +72,8 @@ export default function Portfolio() {
             transition={{ duration: 0.7 }}
             className="group relative overflow-hidden rounded-2xl mb-4 h-[300px] sm:h-[380px] lg:h-[480px]"
           >
-            {/* Iframe preview — desktop only (iframes pesados demais para mobile) */}
-            <div className="absolute inset-0 overflow-hidden hidden sm:block">
-              <iframe
-                src={featured.url}
-                className="iframe-scaled border-0 pointer-events-none"
-                loading="lazy"
-                title={featured.title}
-                sandbox="allow-scripts allow-same-origin"
-              />
-            </div>
-            {/* Mobile placeholder */}
-            <div className="sm:hidden absolute inset-0 bg-gradient-to-br from-[#0D0D0D] via-[#1A1A1A] to-[#0A0A0A]">
+            {/* Background visual — sem iframe */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0D0D0D] via-[#1A1A1A] to-[#0A0A0A]">
               <div className="portfolio-dots absolute inset-0 opacity-[0.07]" />
             </div>
             {/* Overlay */}
@@ -167,18 +157,8 @@ export default function Portfolio() {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="group relative overflow-hidden rounded-2xl h-[220px] sm:h-[260px] lg:h-[300px]"
               >
-                {/* Iframe preview — desktop only */}
-                <div className="hidden sm:block absolute inset-0 overflow-hidden rounded-2xl">
-                  <iframe
-                    src={project.url}
-                    className="iframe-scaled border-0 pointer-events-none"
-                    loading="lazy"
-                    title={project.title}
-                    sandbox="allow-scripts allow-same-origin"
-                  />
-                </div>
-                {/* Mobile placeholder */}
-                <div className="sm:hidden absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#1A1A1A] to-[#0D0D0D]">
+                {/* Background visual — sem iframe */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#1A1A1A] to-[#0D0D0D]">
                   <div className="portfolio-dots absolute inset-0 opacity-[0.07]" />
                 </div>
                 <div className="absolute inset-0 bg-[#0A0A0A]/50 group-hover:bg-[#0A0A0A]/30 transition-all duration-500" />

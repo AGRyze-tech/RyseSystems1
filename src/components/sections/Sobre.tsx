@@ -4,18 +4,25 @@ import { motion } from 'framer-motion'
 import { fadeUp, stagger12, smoothTransition } from '@/lib/animations'
 import { useCountUp } from '@/lib/hooks/useCountUp'
 
+// ⚠️ Atualize esses valores com os números reais da agência
 const stats = [
   { value: 50, suffix: '+', label: 'projetos entregues' },
   { value: 12, suffix: '+', label: 'clientes atendidos' },
-  { value: 3, suffix: '', label: 'produtos ativos' },
-  { value: 20, suffix: '+', label: 'anos de experiência' },
+  { value: 3,  suffix: '',  label: 'produtos ativos' },
+  { value: 2,  suffix: '+', label: 'anos de experiência' },
 ]
 
 function StatRow({ stat, isLast }: { stat: typeof stats[number]; isLast: boolean }) {
   const { count, elRef } = useCountUp(stat.value)
   return (
-    <div className={`group flex items-end justify-between border-t border-ryze-border/40 py-5 lg:py-7 transition-colors duration-500 hover:border-ryze-accent/20 ${isLast ? 'border-b border-ryze-border/40' : ''}`}>
-      <span className="font-mono text-xs uppercase tracking-widest text-ryze-muted/50">{stat.label}</span>
+    <div
+      className={`group flex items-end justify-between border-t border-ryze-border/40 py-5 lg:py-7 transition-colors duration-500 hover:border-ryze-accent/20 ${
+        isLast ? 'border-b border-ryze-border/40' : ''
+      }`}
+    >
+      <span className="font-mono text-xs uppercase tracking-widest text-ryze-muted/50">
+        {stat.label}
+      </span>
       <span className="font-display text-4xl font-extrabold leading-none text-[#40916C] transition-colors duration-300 group-hover:text-[#2D6A4F] md:text-6xl">
         <span ref={elRef}>{count}{stat.suffix}</span>
       </span>
@@ -26,7 +33,6 @@ function StatRow({ stat, isLast }: { stat: typeof stats[number]; isLast: boolean
 export default function Sobre() {
   return (
     <section id="sobre" className="bg-white border-t border-ryze-border/30 relative px-6 py-16 lg:px-8 lg:py-36">
-
       <motion.div
         layout={false}
         initial="hidden"
@@ -75,7 +81,7 @@ export default function Sobre() {
             />
           </motion.div>
 
-          {/* Right — editorial stats */}
+          {/* Right — stats */}
           <motion.div
             variants={fadeUp}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}

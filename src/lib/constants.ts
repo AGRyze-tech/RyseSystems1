@@ -19,5 +19,4 @@ export const footerLinks = [
 export const socials = [
   { label: 'Instagram', href: 'https://www.instagram.com/ryze.systems/' },
   { label: 'WhatsApp', href: WHATSAPP_HREF },
-  { label: 'Behance', href: '#' },
 ] as const
