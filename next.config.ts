@@ -2,10 +2,52 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
-    // Rule bundle-barrel-imports: transforms lucide-react barrel imports into
-    // direct imports at build time — loads only used icons instead of all 1,583
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
-};
+
+  // Cache longo para assets estáticos com hash no nome (JS, CSS, fontes, webm)
+  async headers() {
+    return [
+      {
+        // Assets com hash gerado pelo Next.js — imutáveis, 1 ano de cache
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        // Arquivos estáticos da pasta /public com hash ou nome fixo
+        source: '/DNA.webm',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/logotiporyse.png',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/favicon.ico',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400',
+          },
+        ],
+      },
+    ]
+  },
+}
 
 export default nextConfig;
