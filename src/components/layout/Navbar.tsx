@@ -88,7 +88,7 @@ export default function Navbar() {
               className="flex items-center gap-2.5 shrink-0"
               aria-label="RyzeSystems — Voltar ao topo"
             >
-              <img src="/logo.svg" alt="RyzeSystems" width={32} height={32} className="h-8 w-8" />
+              <img src="/logotipo-removebg-preview.png" alt="RyzeSystems" width={36} height={36} className="h-9 w-9 shrink-0" />
               <span className={`font-display text-[15px] font-bold hidden sm:block transition-colors duration-300 ${logoColor}`}>
                 Ryze<span className="text-ryze-green">.</span>
               </span>
