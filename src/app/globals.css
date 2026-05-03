@@ -33,6 +33,23 @@ html, body {
   max-width: 100vw;
 }
 
+/* Mobile: neutraliza opacity:0 inline do Framer Motion em todos os elementos */
+/* Garante que conteúdo seja sempre visível independente do estado JS */
+@media (max-width: 639px) {
+  [style*="opacity:0"],
+  [style*="opacity: 0"] {
+    opacity: 1 !important;
+  }
+  [style*="translateY(30px)"],
+  [style*="translateY(40px)"],
+  [style*="translateY(20px)"],
+  [style*="translateY(24px)"],
+  [style*="translateY(32px)"],
+  [style*="translateX(-16px)"] {
+    transform: none !important;
+  }
+}
+
 /* -- Base ---------------------------------------- */
 
 html {
@@ -295,6 +312,14 @@ a, button, [role="button"], input, select, textarea {
 
 .reveal.in-view {
   animation-play-state: running;
+}
+
+/* Mobile: conteúdo visível por padrão — sem animações de entrada */
+@media (max-width: 639px) {
+  .reveal {
+    opacity: 1;
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -99,6 +99,7 @@ export default function Hero() {
           variants={stagger12}
           className="font-display font-black uppercase leading-[1.05] tracking-[0.01em] text-[clamp(2rem,6.5vw,8rem)]"
         >
+          {/* No mobile as spans ficam visíveis via CSS (opacity:0 neutralizado no globals.css) */}
           <motion.span className="block text-white" variants={lineVariants}>Tecnologia</motion.span>
           <motion.span className="block text-white" variants={lineVariants}>que transforma</motion.span>
           <motion.span className="block text-ryze-green" variants={lineVariants}>
