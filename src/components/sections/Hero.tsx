@@ -43,7 +43,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-[100dvh] flex flex-col justify-start sm:justify-between bg-ryze-dark pt-24 pb-12 px-5 sm:px-8 lg:px-16 overflow-hidden"
+      className="relative min-h-[100dvh] flex flex-col justify-start sm:justify-between bg-ryze-dark pt-24 pb-12 px-5 sm:px-8 lg:px-16 overflow-x-hidden overflow-y-visible"
       onMouseMove={handleMouseMove}
     >
       {/* Background effects */}
@@ -97,7 +97,7 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={stagger12}
-          className="font-display font-black uppercase leading-[1.05] tracking-[0.01em] text-[clamp(2.4rem,7vw,8rem)]"
+          className="font-display font-black uppercase leading-[1.05] tracking-[0.01em] text-[clamp(2rem,6.5vw,8rem)]"
         >
           <motion.span className="block text-white" variants={lineVariants}>Tecnologia</motion.span>
           <motion.span className="block text-white" variants={lineVariants}>que transforma</motion.span>
@@ -159,7 +159,7 @@ export default function Hero() {
             Criamos sites, sistemas e SmartPages para clínicas e profissionais de saúde que querem crescer com inteligência.
           </p>
           {/* CTA com border beam */}
-          <div className="relative group w-full rounded-2xl p-[1.5px] bg-[#40916C]/25 overflow-hidden">
+          <div className="relative group w-full max-w-sm sm:max-w-full rounded-2xl p-[1.5px] bg-[#40916C]/25 overflow-hidden">
             {/* Rotating beam */}
             <div aria-hidden="true" className="cta-border-beam hidden sm:block" />
             <button
