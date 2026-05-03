@@ -83,11 +83,11 @@ export default function Contato() {
               Vamos conversar
             </span>
             <h2 className="font-display text-3xl font-extrabold tracking-tight text-white md:text-5xl">
-              Solicite seu{' '}
-              <span className="text-[#40916C]">diagnóstico gratuito.</span>
+              Sua agenda cheia{' '}
+              <span className="text-[#40916C]">começa aqui.</span>
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-white/50">
-              Em minutos preenchemos seu perfil. Você recebe uma proposta personalizada — sem compromisso, sem letras miúdas.
+              Preencha abaixo e entraremos em contato via WhatsApp. Sem enrolação — só resultados.
             </p>
             <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-[#40916C]/30 bg-[#40916C]/10 px-4 py-2">
               <span className="h-2 w-2 rounded-full bg-[#40916C] animate-pulse" />
@@ -202,7 +202,7 @@ export default function Contato() {
                   {status === 'loading' ? (
                     <><Loader2 size={18} className="animate-spin" /> Abrindo WhatsApp...</>
                   ) : (
-                    <>Quero meu diagnóstico gratuito <Send size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" /></>
+                    <>Quero minha agenda cheia <Send size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" /></>
                   )}
                 </MagneticButton>
 

@@ -26,13 +26,13 @@ export default function Footer() {
             Próximo passo
           </span>
           <h3 className="font-display font-black uppercase text-white leading-[0.9] tracking-tight text-[clamp(3rem,8vw,7rem)]">
-            Vamos construir<br />
+            Sua agenda não vai<br />
             <span className="text-[#40916C] text-glow-pulse">
-              juntos.
+              lotar sozinha.
             </span>
           </h3>
           <p className="mt-6 text-white/40 text-lg max-w-md mx-auto leading-relaxed">
-            Seu projeto começa com uma conversa.
+            Dê o primeiro passo para parar de depender só de indicação.
           </p>
           <MagneticButton
             as="a"
@@ -40,7 +40,7 @@ export default function Footer() {
             onClick={(e: React.MouseEvent) => { e.preventDefault(); scrollTo('#contato') }}
             className="group mt-8 inline-flex items-center gap-2 bg-[#40916C] text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-[#2D6A4F] hover:shadow-[0_0_30px_rgba(64,145,108,0.3)] hover:scale-[1.03] active:scale-[0.98]"
           >
-            Solicitar diagnóstico
+            Quero minha agenda cheia
             <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </MagneticButton>
         </motion.div>

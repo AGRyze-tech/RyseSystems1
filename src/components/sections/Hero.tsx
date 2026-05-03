@@ -161,7 +161,6 @@ export default function Hero() {
           </p>
           {/* CTA com border beam */}
           <div className="relative group w-full max-w-sm sm:max-w-full rounded-2xl p-[1.5px] bg-[#40916C]/25 overflow-hidden">
-            {/* Rotating beam */}
             <div aria-hidden="true" className="cta-border-beam hidden sm:block" />
             <button
               type="button"
@@ -169,7 +168,7 @@ export default function Hero() {
               className="relative z-10 w-full flex items-center justify-center gap-2 bg-ryze-green text-white px-7 py-4 rounded-[14px] text-sm font-bold tracking-wide hover:bg-ryze-forest-hover active:scale-[0.98] transition-all duration-300 overflow-hidden"
             >
               <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none" />
-              Solicitar diagnóstico
+              Quero minha agenda cheia
               <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </div>

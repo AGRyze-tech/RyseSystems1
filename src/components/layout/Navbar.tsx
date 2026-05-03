@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowRight } from 'lucide-react'
+import Image from 'next/image'
 import { navLinks, CONTACT_EMAIL } from '@/lib/constants'
 import { scrollTo as scrollToSection } from '@/lib/scrollTo'
 
