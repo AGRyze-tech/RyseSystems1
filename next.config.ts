@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
 
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
+
   // Cache longo para assets estáticos com hash no nome (JS, CSS, fontes, webm)
   async headers() {
     return [
@@ -30,6 +34,24 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/logotiporyse.png',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/(portfolio-clarissa|portfolio-mayara|portfolio-simone).webp',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/logo.svg',
         headers: [
           {
             key: 'Cache-Control',

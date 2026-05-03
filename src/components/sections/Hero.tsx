@@ -54,6 +54,7 @@ export default function Hero() {
           loop
           muted
           playsInline
+          preload="metadata"
           aria-hidden="true"
           className="dna-gif absolute inset-0 h-full w-full object-cover mix-blend-screen opacity-[0.18] hidden sm:block"
         >

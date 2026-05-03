@@ -144,6 +144,7 @@ a, button, [role="button"], input, select, textarea {
 
 .text-glow-pulse {
   animation: text-glow 4.5s ease-in-out infinite;
+  will-change: filter;
 }
 
 /* -- Reduced motion ------------------------------ */
@@ -174,6 +175,7 @@ a, button, [role="button"], input, select, textarea {
     transparent      360deg
   );
   animation: beam-spin 3s linear infinite;
+  will-change: rotate;
   pointer-events: none;
 }
 
@@ -295,6 +297,7 @@ a, button, [role="button"], input, select, textarea {
   animation-iteration-count: infinite;
   animation-delay: var(--p-delay, 0s);
   animation-duration: var(--p-dur, 6s);
+  will-change: transform;
 }
 
 /* -- Scroll reveal (CSS-only, sem JS) ------------ */

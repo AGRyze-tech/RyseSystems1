@@ -176,6 +176,7 @@ export default function Portfolio() {
                     fill
                     sizes="(max-width: 768px) 100vw, 576px"
                     className="object-cover object-top"
+                    loading="lazy"
                   />
                 </div>
                 <div className="absolute inset-0 bg-[#0A0A0A]/50 group-hover:bg-[#0A0A0A]/30 transition-all duration-500" />
