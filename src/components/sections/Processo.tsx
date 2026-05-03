@@ -173,7 +173,7 @@ function SimpleStepItem({ step, index }: { step: typeof steps[0]; index: number 
       </div>
 
       {/* Conteúdo */}
-      <div className="pl-5 pb-8 pt-1">
+      <div className={`pl-5 pt-1 ${index < steps.length - 1 ? 'pb-8' : 'pb-2'}`}>
         <h3 className="font-display font-black text-xl uppercase tracking-tight text-white">
           {step.title}
         </h3>
@@ -211,7 +211,7 @@ export default function Processo() {
   })
 
   return (
-    <section ref={sectionRef} id="processo" className="relative bg-ryze-dark px-6 py-24 lg:px-16 lg:py-32 overflow-hidden">
+    <section ref={sectionRef} id="processo" className="relative bg-ryze-dark px-6 py-16 lg:px-16 lg:py-32 overflow-hidden">
 
       {/* Background */}
       <div className="pointer-events-none absolute inset-0">

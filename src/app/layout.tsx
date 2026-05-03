@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Syne, DM_Sans, JetBrains_Mono } from "next/font/google";
 import ClientShell from "@/components/ui/ClientShell";
+import MotionProvider from "@/components/ui/MotionProvider";
 import "./globals.css";
 
 const syne = Syne({
@@ -41,7 +42,9 @@ export default function RootLayout({
         className={`${syne.variable} ${dmSans.variable} ${jetbrainsMono.variable} font-body antialiased`}
       >
         <ClientShell />
-        {children}
+        <MotionProvider>
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );

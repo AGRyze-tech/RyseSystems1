@@ -18,7 +18,7 @@ const items = [
 
 export default function Diferenciais() {
   return (
-    <section id="diferenciais" className="cv-auto relative px-6 py-28 lg:px-8 lg:py-36">
+    <section id="diferenciais" className="relative px-6 py-28 lg:px-8 lg:py-36">
       <motion.div
         layout={false}
         initial="hidden"

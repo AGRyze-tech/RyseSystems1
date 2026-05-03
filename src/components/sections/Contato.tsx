@@ -172,15 +172,20 @@ export default function Contato() {
                   <label htmlFor="hasSite" className="mb-2 block text-sm font-medium text-white/60">
                     Já tem ou já teve um site? *
                   </label>
-                  <select
-                    id="hasSite" name="hasSite" required defaultValue=""
-                    className={`${inputClass} appearance-none`}
-                  >
-                    <option value="" disabled>Selecione uma opção</option>
-                    <option value="Sim, tenho site ativo">Sim, tenho site ativo</option>
-                    <option value="Tive, mas está fora do ar">Tive, mas está fora do ar</option>
-                    <option value="Nunca tive um site">Nunca tive um site</option>
-                  </select>
+                  <div className="relative">
+                    <select
+                      id="hasSite" name="hasSite" required defaultValue=""
+                      className={`${inputClass} appearance-none pr-10`}
+                    >
+                      <option value="" disabled>Selecione uma opção</option>
+                      <option value="Sim, tenho site ativo">Sim, tenho site ativo</option>
+                      <option value="Tive, mas está fora do ar">Tive, mas está fora do ar</option>
+                      <option value="Nunca tive um site">Nunca tive um site</option>
+                    </select>
+                    <svg className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+                    </svg>
+                  </div>
                 </div>
 
                 {status === 'error' && (

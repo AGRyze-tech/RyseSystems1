@@ -128,7 +128,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMobileOpen(prev => !prev)}
-              className={`md:hidden flex items-center justify-center h-10 w-10 rounded-lg transition-colors duration-200 ${btnColor}`}
+              className={`md:hidden flex items-center justify-center h-11 w-11 rounded-lg transition-colors duration-200 ${btnColor}`}
               aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
               aria-expanded={mobileOpen}
             >
