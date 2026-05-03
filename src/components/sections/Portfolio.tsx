@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
+import Image from 'next/image'
 
 const featured = {
   number: '01',
@@ -12,6 +13,7 @@ const featured = {
   resultLabel: 'leads orgânicos em 60 dias',
   description: 'Landing page para nutricionista com foco em captação e agendamento.',
   url: 'https://clarissacunhanutricionista.com.br',
+  screenshot: '/portfolio-clarissa.webp',
 }
 
 const others = [
@@ -23,6 +25,7 @@ const others = [
     result: '3x',
     resultLabel: 'agendamentos no 1º mês',
     url: 'https://mayaradellacosta.com.br',
+    screenshot: '/portfolio-mayara.webp',
   },
   {
     number: '03',
@@ -32,6 +35,7 @@ const others = [
     result: '60%',
     resultLabel: 'redução no tempo administrativo',
     url: 'https://simoneramaldesnutri.com.br',
+    screenshot: '/portfolio-simone.webp',
   },
 ]
 
@@ -72,9 +76,16 @@ export default function Portfolio() {
             transition={{ duration: 0.7 }}
             className="group relative overflow-hidden rounded-2xl mb-4 h-[300px] sm:h-[380px] lg:h-[480px]"
           >
-            {/* Background visual — sem iframe */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0D0D0D] via-[#1A1A1A] to-[#0A0A0A]">
-              <div className="portfolio-dots absolute inset-0 opacity-[0.07]" />
+            {/* Background visual — screenshot WebP */}
+            <div className="absolute inset-0">
+              <Image
+                src={featured.screenshot}
+                alt={`Preview do site ${featured.title}`}
+                fill
+                sizes="(max-width: 768px) 100vw, 1152px"
+                className="object-cover object-top"
+                priority
+              />
             </div>
             {/* Overlay */}
             <div className="absolute inset-0 bg-[#0A0A0A]/50 group-hover:bg-[#0A0A0A]/30 transition-all duration-500" />
@@ -157,9 +168,15 @@ export default function Portfolio() {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="group relative overflow-hidden rounded-2xl h-[220px] sm:h-[260px] lg:h-[300px]"
               >
-                {/* Background visual — sem iframe */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#1A1A1A] to-[#0D0D0D]">
-                  <div className="portfolio-dots absolute inset-0 opacity-[0.07]" />
+                {/* Background visual — screenshot WebP */}
+                <div className="absolute inset-0">
+                  <Image
+                    src={project.screenshot}
+                    alt={`Preview do site ${project.title}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 576px"
+                    className="object-cover object-top"
+                  />
                 </div>
                 <div className="absolute inset-0 bg-[#0A0A0A]/50 group-hover:bg-[#0A0A0A]/30 transition-all duration-500" />
 
