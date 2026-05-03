@@ -109,8 +109,8 @@ export default function Portfolio() {
 
             {/* Tags — topo esquerdo */}
             <div className="absolute top-5 left-5 sm:top-7 sm:left-7 z-10 max-w-[55%]">
-              <span className="inline-flex items-center gap-2 bg-black/30 border border-white/10 rounded-full px-3 sm:px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-white/60 sm:backdrop-blur-sm truncate">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#40916C] shrink-0" />
+              <span className="inline-flex items-center gap-2 bg-black/60 border border-white/20 rounded-full px-3 sm:px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-white/90 sm:backdrop-blur-sm truncate">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#74C69D] shrink-0" />
                 {featured.tags}
               </span>
             </div>
@@ -136,24 +136,24 @@ export default function Portfolio() {
             </div>
 
             {/* Barra inferior: título + resultado mobile — layout flex sem sobreposição */}
-            <div className="absolute bottom-0 left-0 right-0 z-10 px-5 sm:px-7 pb-5 sm:pb-7 pt-12 bg-gradient-to-t from-[#0A0A0A]/80 via-[#0A0A0A]/40 to-transparent">
+            <div className="absolute bottom-0 left-0 right-0 z-10 px-5 sm:px-7 pb-5 sm:pb-7 pt-16 bg-gradient-to-t from-[#0A0A0A]/95 via-[#0A0A0A]/60 to-transparent">
               <div className="flex items-end justify-between gap-3">
                 {/* Título e categoria */}
                 <div className="min-w-0 flex-1">
-                  <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30 block mb-1.5">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/55 block mb-1.5">
                     Projeto
                   </span>
                   <h3 className="font-display font-black uppercase tracking-tight leading-tight text-white">
                     <span className="block text-base sm:text-3xl lg:text-5xl">{featured.title}</span>
-                    <span className="text-[#40916C] text-xs sm:text-2xl lg:text-3xl">— {featured.category}</span>
+                    <span className="text-[#74C69D] text-xs sm:text-2xl lg:text-3xl">— {featured.category}</span>
                   </h3>
                 </div>
                 {/* Resultado — visível só no mobile (desktop usa centro direito acima) */}
                 <div className="text-right shrink-0 sm:hidden">
-                  <p className="font-display font-black text-[#74C69D] text-2xl leading-none tracking-tight drop-shadow-[0_0_12px_rgba(116,198,157,0.4)]">
+                  <p className="font-display font-black text-[#74C69D] text-2xl leading-none tracking-tight drop-shadow-[0_0_12px_rgba(116,198,157,0.5)]">
                     <ResultNumber value={featured.result} className="" />
                   </p>
-                  <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-white/70 mt-1 max-w-[90px] ml-auto leading-relaxed">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/90 mt-1 max-w-[90px] ml-auto leading-relaxed">
                     {featured.resultLabel}
                   </p>
                 </div>
@@ -164,7 +164,7 @@ export default function Portfolio() {
 
         {/* Label outros projetos */}
         <div className="mb-4 mt-10">
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25">
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/55">
             Outros projetos
           </span>
         </div>
@@ -200,8 +200,8 @@ export default function Portfolio() {
 
                 {/* Tags */}
                 <div className="absolute top-4 left-4 sm:top-5 sm:left-5 z-10 max-w-[55%]">
-                  <span className="inline-flex items-center gap-1.5 bg-black/30 border border-white/10 rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-white/50 sm:backdrop-blur-sm truncate">
-                    <span className="h-1 w-1 rounded-full bg-[#40916C] shrink-0" />
+                  <span className="inline-flex items-center gap-1.5 bg-black/60 border border-white/20 rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-white/90 sm:backdrop-blur-sm truncate">
+                    <span className="h-1 w-1 rounded-full bg-[#74C69D] shrink-0" />
                     {project.tags}
                   </span>
                 </div>
@@ -217,23 +217,25 @@ export default function Portfolio() {
                 </div>
 
                 {/* Resultado — visível em todos os tamanhos */}
-                <div className="absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 text-right z-10">
-                  <p className="font-display font-black text-[#74C69D] text-2xl sm:text-4xl lg:text-5xl leading-none tracking-tight drop-shadow-[0_0_12px_rgba(116,198,157,0.4)]">
+                <div className="absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 text-right z-10 bg-black/40 rounded-xl px-3 py-2">
+                  <p className="font-display font-black text-[#74C69D] text-2xl sm:text-4xl lg:text-5xl leading-none tracking-tight drop-shadow-[0_0_12px_rgba(116,198,157,0.5)]">
                     <ResultNumber value={project.result} className="" />
                   </p>
-                  <p className="font-mono text-[9px] sm:text-[11px] uppercase tracking-[0.15em] text-white/70 mt-1.5 max-w-[90px] sm:max-w-[140px] ml-auto leading-relaxed">
+                  <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.12em] text-white/90 mt-1.5 max-w-[90px] sm:max-w-[140px] ml-auto leading-relaxed">
                     {project.resultLabel}
                   </p>
                 </div>
 
+                {/* Gradiente inferior — largura total para contraste */}
+                <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#0A0A0A]/90 via-[#0A0A0A]/50 to-transparent pointer-events-none" />
                 {/* Info inferior — max-w-[55%] evita sobreposição com resultado */}
                 <div className="absolute bottom-4 left-4 sm:bottom-5 sm:left-5 z-10 max-w-[55%]">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/25 block mb-1">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/55 block mb-1">
                     Projeto
                   </span>
-                  <h3 className="font-display font-black uppercase tracking-tight leading-tight text-white group-hover:text-[#40916C] transition-colors duration-300">
+                  <h3 className="font-display font-black uppercase tracking-tight leading-tight text-white group-hover:text-[#74C69D] transition-colors duration-300">
                     <span className="block text-sm sm:text-xl lg:text-2xl">{project.title}</span>
-                    <span className="text-[#40916C]/70 group-hover:text-white/70 text-xs sm:text-base transition-colors duration-300">
+                    <span className="text-[#74C69D] group-hover:text-white/70 text-xs sm:text-base transition-colors duration-300">
                       — {project.category}
                     </span>
                   </h3>
