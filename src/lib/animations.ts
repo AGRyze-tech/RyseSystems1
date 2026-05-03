@@ -5,6 +5,11 @@ export const fadeUp: Variants = {
   visible: { opacity: 1, y: 0 },
 }
 
+export const fadeUpScale: Variants = {
+  hidden: { opacity: 0, y: 24, scale: 0.96 },
+  visible: { opacity: 1, y: 0, scale: 1 },
+}
+
 export const stagger = (delay = 0.1): Variants => ({
   hidden: {},
   visible: { transition: { staggerChildren: delay } },

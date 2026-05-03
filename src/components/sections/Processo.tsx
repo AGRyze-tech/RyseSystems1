@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef, useState, useEffect } from 'react'
-import { motion, useScroll, useTransform, useSpring, MotionValue } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring, useInView, MotionValue } from 'framer-motion'
 
 const steps = [
   {
@@ -149,18 +149,21 @@ function ScrollStepItem({
 // ── Mobile: whileInView simples (sem scroll-driven springs) ───────────────────
 
 function SimpleStepItem({ step, index }: { step: typeof steps[0]; index: number }) {
+  const lineRef = useRef<HTMLDivElement>(null)
+  const isLineInView = useInView(lineRef, { once: true, amount: 0.4 })
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: -16 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 20, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.45, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
       className="relative grid grid-cols-[52px_1fr] gap-0 min-h-[120px]"
     >
       {/* Coluna da timeline */}
       <div className="flex flex-col items-center">
         {index > 0 ? (
-          <div className="w-px h-6 bg-white/15 flex-none" />
+          <div className="w-px h-6 bg-white/10 flex-none" />
         ) : (
           <div className="h-6" />
         )}
@@ -168,7 +171,15 @@ function SimpleStepItem({ step, index }: { step: typeof steps[0]; index: number 
           <span className="font-mono text-[11px] font-bold text-white">{step.number}</span>
         </div>
         {index < steps.length - 1 && (
-          <div className="w-px flex-1 bg-white/15 min-h-[80px]" />
+          <div ref={lineRef} className="relative w-px flex-1 bg-white/10 min-h-[80px]">
+            <motion.div
+              initial={{ scaleY: 0 }}
+              animate={isLineInView ? { scaleY: 1 } : {}}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              style={{ originY: '0%' }}
+              className="absolute inset-0 bg-gradient-to-b from-[#40916C] to-[#40916C]/20"
+            />
+          </div>
         )}
       </div>
 

@@ -3,6 +3,18 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
+import { useCountUp } from '@/lib/hooks/useCountUp'
+
+function parseResult(value: string) {
+  const m = value.match(/^([+]?)(\d+)([%x]*)$/)
+  return { prefix: m?.[1] ?? '', number: parseInt(m?.[2] ?? '0'), suffix: m?.[3] ?? '' }
+}
+
+function ResultNumber({ value, className }: { value: string; className: string }) {
+  const { prefix, number, suffix } = parseResult(value)
+  const { count, elRef } = useCountUp(number, 1800)
+  return <span ref={elRef} className={className}>{prefix}{count}{suffix}</span>
+}
 
 const featured = {
   number: '01',
@@ -116,7 +128,7 @@ export default function Portfolio() {
             {/* Desktop: resultado em destaque — centro direito */}
             <div className="absolute right-10 top-1/2 -translate-y-1/2 text-right hidden sm:block z-10">
               <p className="font-display font-black text-[#74C69D] text-[clamp(3rem,7vw,6rem)] leading-none tracking-tight drop-shadow-[0_0_20px_rgba(116,198,157,0.4)]">
-                {featured.result}
+                <ResultNumber value={featured.result} className="" />
               </p>
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/70 mt-2 max-w-[180px] ml-auto leading-relaxed">
                 {featured.resultLabel}
@@ -139,7 +151,7 @@ export default function Portfolio() {
                 {/* Resultado — visível só no mobile (desktop usa centro direito acima) */}
                 <div className="text-right shrink-0 sm:hidden">
                   <p className="font-display font-black text-[#74C69D] text-2xl leading-none tracking-tight drop-shadow-[0_0_12px_rgba(116,198,157,0.4)]">
-                    {featured.result}
+                    <ResultNumber value={featured.result} className="" />
                   </p>
                   <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-white/70 mt-1 max-w-[90px] ml-auto leading-relaxed">
                     {featured.resultLabel}
@@ -207,7 +219,7 @@ export default function Portfolio() {
                 {/* Resultado — visível em todos os tamanhos */}
                 <div className="absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 text-right z-10">
                   <p className="font-display font-black text-[#74C69D] text-2xl sm:text-4xl lg:text-5xl leading-none tracking-tight drop-shadow-[0_0_12px_rgba(116,198,157,0.4)]">
-                    {project.result}
+                    <ResultNumber value={project.result} className="" />
                   </p>
                   <p className="font-mono text-[9px] sm:text-[11px] uppercase tracking-[0.15em] text-white/70 mt-1.5 max-w-[90px] sm:max-w-[140px] ml-auto leading-relaxed">
                     {project.resultLabel}

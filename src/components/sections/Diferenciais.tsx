@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { HeartPulse, Timer, Paintbrush, Layers, Target, Handshake, ArrowRight } from 'lucide-react'
 import TiltCard from '@/components/ui/TiltCard'
 import MagneticButton from '@/components/ui/MagneticButton'
-import { fadeUp, stagger08, smoothTransition } from '@/lib/animations'
+import { fadeUp, fadeUpScale, stagger08, smoothTransition } from '@/lib/animations'
 import { scrollTo } from '@/lib/scrollTo'
 
 const items = [
@@ -47,7 +47,7 @@ export default function Diferenciais() {
           {items.map((item) => (
             <motion.div
               key={item.title}
-              variants={fadeUp}
+              variants={fadeUpScale}
               transition={smoothTransition}
             >
               <TiltCard className="group flex flex-col rounded-2xl border border-ryze-border bg-white p-8 transition-all duration-500 hover:border-ryze-cta/30 hover:shadow-xl hover:shadow-ryze-cta/[0.05] md:p-10">
