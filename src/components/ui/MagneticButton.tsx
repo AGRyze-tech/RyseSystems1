@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, type ReactNode } from 'react'
+import { useRef, useState, useEffect, type ReactNode } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 interface Props {
@@ -29,19 +29,31 @@ export default function MagneticButton({
   const y = useMotionValue(0)
   const springX = useSpring(x, { stiffness: 200, damping: 15 })
   const springY = useSpring(y, { stiffness: 200, damping: 15 })
+  const [isTouch, setIsTouch] = useState(true)
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
 
   const handleMouse = (e: React.MouseEvent) => {
     if (!ref.current) return
     const rect = ref.current.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    x.set((e.clientX - centerX) * strength)
-    y.set((e.clientY - centerY) * strength)
+    x.set((e.clientX - rect.left - rect.width / 2) * strength)
+    y.set((e.clientY - rect.top - rect.height / 2) * strength)
   }
 
-  const reset = () => {
-    x.set(0)
-    y.set(0)
+  const reset = () => { x.set(0); y.set(0) }
+
+  // Touch: render plain element — zero magnetic overhead
+  if (isTouch) {
+    if (as === 'a') {
+      return <a href={href} className={className} onClick={onClick}>{children}</a>
+    }
+    return (
+      <button type={type} disabled={disabled} className={className} onClick={onClick}>
+        {children}
+      </button>
+    )
   }
 
   const shared = {

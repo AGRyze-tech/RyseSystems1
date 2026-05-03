@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowRight } from 'lucide-react'
-import Image from 'next/image'
 import { navLinks, CONTACT_EMAIL } from '@/lib/constants'
 import { scrollTo as scrollToSection } from '@/lib/scrollTo'
 
@@ -88,12 +87,12 @@ export default function Navbar() {
               className="flex items-center gap-2.5 shrink-0"
               aria-label="RyzeSystems — Voltar ao topo"
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/logo.svg"
                 alt="RyzeSystems"
                 width={32}
                 height={32}
-                priority
                 className="h-8 w-8"
               />
               <span className={`font-display text-[15px] font-bold hidden sm:block transition-colors duration-300 ${logoColor}`}>

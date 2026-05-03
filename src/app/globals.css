@@ -275,6 +275,27 @@ a, button, [role="button"], input, select, textarea {
   animation-duration: var(--p-dur, 6s);
 }
 
+/* -- Scroll reveal (CSS-only, sem JS) ------------ */
+/* Substitui whileInView do Framer Motion em mobile */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  animation: revealUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-play-state: paused;
+}
+
+.reveal.in-view {
+  animation-play-state: running;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; animation: none; }
+}
+
 /* -- Select option colors (dark theme) ----------- */
 
 select option {
