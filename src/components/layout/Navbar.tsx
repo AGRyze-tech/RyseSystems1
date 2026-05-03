@@ -53,17 +53,15 @@ export default function Navbar() {
     scrollToSection(href)
   }, [])
 
-  // Navbar background style — 3 states: overlay open / scrolled / transparent
+  // mobileOpen overrides scrolled to keep text contrast on the dark overlay
   const navBg = mobileOpen
     ? 'bg-ryze-dark border border-white/[0.06]'
     : scrolled
     ? 'bg-white md:bg-white/95 md:backdrop-blur-xl border border-black/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.06)]'
     : 'bg-transparent border border-transparent'
 
-  // Logo text color
   const logoColor = mobileOpen || !scrolled ? 'text-white' : 'text-[#0A0A0A]'
 
-  // Hamburger button style
   const btnColor = mobileOpen
     ? 'text-white/70 hover:text-white hover:bg-white/[0.06]'
     : scrolled
@@ -88,7 +86,7 @@ export default function Navbar() {
               className="flex items-center gap-2.5 shrink-0"
               aria-label="RyzeSystems — Voltar ao topo"
             >
-              <img src="/logotipo-removebg-preview.png" alt="RyzeSystems" width={36} height={36} className="h-9 w-9 shrink-0" />
+              <Image src="/logotipo-removebg-preview.png" alt="RyzeSystems" width={36} height={36} className="h-9 w-9 shrink-0" priority />
               <span className={`font-display text-[15px] font-bold hidden sm:block transition-colors duration-300 ${logoColor}`}>
                 Ryze<span className="text-ryze-green">.</span>
               </span>
