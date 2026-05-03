@@ -89,7 +89,7 @@ export default function Navbar() {
               aria-label="RyzeSystems — Voltar ao topo"
             >
               <Image
-                src="/logotiporyse.png"
+                src="/logo.svg"
                 alt="RyzeSystems"
                 width={32}
                 height={32}
