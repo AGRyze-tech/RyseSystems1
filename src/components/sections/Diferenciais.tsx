@@ -47,30 +47,64 @@ const items: { number: string; title: string; description: string; variant: Vari
   },
 ]
 
-const cardStyles: Record<Variant, { card: string; number: string; title: string; description: string }> = {
-  light: {
-    card: 'bg-white border border-ryze-border',
-    number: 'text-ryze-accent/20',
-    title: 'text-ryze-accent',
-    description: 'text-ryze-muted',
-  },
-  accent: {
-    card: 'bg-gradient-to-br from-[#40916C] via-[#2D6A4F] to-[#1B4332]',
-    number: 'text-white/20',
-    title: 'text-white',
-    description: 'text-white/70',
-  },
-  dark: {
-    card: 'bg-[#0A1A0F]',
-    number: 'text-white/15',
-    title: 'text-white',
-    description: 'text-white/55',
-  },
+function Card({ item }: { item: typeof items[0] }) {
+  if (item.variant === 'light') {
+    return (
+      <div className="relative rounded-2xl p-7 sm:p-8 lg:p-10 flex flex-col justify-between min-h-[220px] sm:min-h-[260px] lg:min-h-[280px] overflow-hidden bg-[#E8F0E9]">
+        <span className="font-mono text-5xl sm:text-6xl font-bold leading-none select-none text-[#0c4a34]/20">
+          {item.number}
+        </span>
+        <div>
+          <h3 className="font-display font-black uppercase text-xl sm:text-2xl tracking-tight mb-3 leading-tight text-[#0c4a34]">
+            {item.title}
+          </h3>
+          <p className="text-sm leading-relaxed text-[#0c4a34]/60">
+            {item.description}
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  if (item.variant === 'accent') {
+    return (
+      <div className="card-accent-gradient relative rounded-2xl p-7 sm:p-8 lg:p-10 flex flex-col justify-between min-h-[220px] sm:min-h-[260px] lg:min-h-[280px] overflow-hidden">
+        <span className="font-mono text-5xl sm:text-6xl font-bold leading-none select-none text-white/20">
+          {item.number}
+        </span>
+        <div>
+          <h3 className="font-display font-black uppercase text-xl sm:text-2xl tracking-tight mb-3 leading-tight text-white">
+            {item.title}
+          </h3>
+          <p className="text-sm leading-relaxed text-white/70">
+            {item.description}
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  // dark
+  return (
+    <div className="relative rounded-2xl p-7 sm:p-8 lg:p-10 flex flex-col justify-between min-h-[220px] sm:min-h-[260px] lg:min-h-[280px] overflow-hidden bg-[#111D13]">
+      <span className="font-mono text-5xl sm:text-6xl font-bold leading-none select-none text-white/15">
+        {item.number}
+      </span>
+      <div>
+        <h3 className="font-display font-black uppercase text-xl sm:text-2xl tracking-tight mb-3 leading-tight text-white">
+          {item.title}
+        </h3>
+        <p className="text-sm leading-relaxed text-white/50">
+          {item.description}
+        </p>
+      </div>
+    </div>
+  )
 }
 
 export default function Diferenciais() {
   return (
-    <section id="diferenciais" className="relative bg-[#f6faf7] px-6 py-24 lg:px-8 lg:py-32">
+    <section id="diferenciais" className="relative bg-[#0A1A0F] px-6 py-24 lg:px-8 lg:py-32">
       <div className="relative z-10 mx-auto max-w-6xl">
 
         {/* Header */}
@@ -82,15 +116,16 @@ export default function Diferenciais() {
           className="mb-12 lg:mb-16"
         >
           <div className="flex items-center gap-2 mb-4">
-            <ArrowRight size={12} className="text-ryze-muted" />
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-ryze-muted">
+            <ArrowRight size={12} className="text-[#40916C]" />
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#40916C]">
               Por que escolher a Ryze?
             </span>
           </div>
-          <h2 className="font-display font-black uppercase tracking-tight text-ryze-text text-[clamp(2rem,5vw,4.5rem)] leading-[0.95]">
+          <h2 className="font-display font-black uppercase tracking-tight text-white text-[clamp(2rem,5vw,4.5rem)] leading-[0.95]">
             Feitos para a<br />
-            <span className="text-ryze-cta">saúde digital.</span>
+            <span className="text-[#52B788]">saúde digital.</span>
           </h2>
+          <div className="mt-6 h-px w-16 bg-[#40916C]/40" />
         </motion.div>
 
         {/* Grid de cards */}
@@ -99,39 +134,17 @@ export default function Diferenciais() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.05 }}
           variants={stagger08}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-3"
         >
-          {items.map((item) => {
-            const s = cardStyles[item.variant]
-            return (
-              <motion.div
-                key={item.number}
-                variants={fadeUpScale}
-                transition={smoothTransition}
-                className={`relative rounded-2xl p-7 sm:p-8 lg:p-10 flex flex-col justify-between min-h-[220px] sm:min-h-[260px] lg:min-h-[280px] overflow-hidden ${s.card}`}
-              >
-                {/* Glow decorativo nos cards accent */}
-                {item.variant === 'accent' && (
-                  <div className="pointer-events-none absolute -top-10 -left-10 w-48 h-48 rounded-full bg-white/20 blur-3xl" />
-                )}
-
-                {/* Número */}
-                <span className={`font-mono text-5xl sm:text-6xl font-bold leading-none select-none ${s.number}`}>
-                  {item.number}
-                </span>
-
-                {/* Título + Descrição */}
-                <div>
-                  <h3 className={`font-display font-black uppercase text-xl sm:text-2xl tracking-tight mb-3 leading-tight ${s.title}`}>
-                    {item.title}
-                  </h3>
-                  <p className={`text-sm leading-relaxed ${s.description}`}>
-                    {item.description}
-                  </p>
-                </div>
-              </motion.div>
-            )
-          })}
+          {items.map((item) => (
+            <motion.div
+              key={item.number}
+              variants={fadeUpScale}
+              transition={smoothTransition}
+            >
+              <Card item={item} />
+            </motion.div>
+          ))}
         </motion.div>
 
         {/* CTA */}
@@ -142,19 +155,19 @@ export default function Diferenciais() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-14 flex flex-col items-center gap-5 text-center"
         >
-          <p className="text-lg font-medium text-ryze-muted">
+          <p className="text-lg font-medium text-white/50">
             Tudo isso no seu projeto.{' '}
-            <span className="text-ryze-text">Sem complicação.</span>
+            <span className="text-white">Sem complicação.</span>
           </p>
           <MagneticButton
             as="button"
             onClick={() => scrollTo('#contato')}
-            className="group inline-flex items-center gap-2 rounded-full bg-ryze-cta px-8 py-4 text-base font-semibold text-white transition-all duration-300 hover:bg-ryze-cta/90 hover:shadow-2xl hover:shadow-ryze-cta/20 hover:scale-[1.02]"
+            className="group inline-flex items-center gap-2 rounded-full bg-[#40916C] px-8 py-4 text-base font-semibold text-white transition-all duration-300 hover:bg-[#2D6A4F] hover:shadow-2xl hover:shadow-[#40916C]/20 hover:scale-[1.02]"
           >
             Falar com a Ryze agora
             <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
           </MagneticButton>
-          <p className="text-xs text-ryze-muted/60 font-mono">
+          <p className="text-xs text-white/25 font-mono">
             Resposta em até 24h · Sem compromisso
           </p>
         </motion.div>

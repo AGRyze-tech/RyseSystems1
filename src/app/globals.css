@@ -230,6 +230,12 @@ a, button, [role="button"], input, select, textarea {
   color: #F8F8F8;
 }
 
+/* -- Diferenciais accent card gradient ----------- */
+
+.card-accent-gradient {
+  background: radial-gradient(ellipse at 25% 28%, #52B788 0%, #2D6A4F 45%, #1B4332 100%);
+}
+
 /* -- Content visibility for below-fold sections -- */
 
 .cv-auto {
