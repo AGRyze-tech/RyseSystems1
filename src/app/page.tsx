@@ -1,7 +1,7 @@
 import Navbar from '@/components/layout/Navbar'
 import Hero from '@/components/sections/Hero'
 import Marquee from '@/components/sections/Marquee'
-import Servicos from '@/components/sections/Servicos'
+import Diferenciais from '@/components/sections/Diferenciais'
 import Processo from '@/components/sections/Processo'
 import Portfolio from '@/components/sections/Portfolio'
 import Sobre from '@/components/sections/Sobre'
@@ -22,7 +22,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Marquee />
-      <Servicos />
+      <Diferenciais />
       <Processo />
       <Portfolio />
       <Sobre />
