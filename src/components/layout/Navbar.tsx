@@ -53,20 +53,18 @@ export default function Navbar() {
     scrollToSection(href)
   }, [])
 
-  // mobileOpen overrides scrolled to keep text contrast on the dark overlay
+  // Fundo sempre escuro — glass ao rolar, transparente no topo
   const navBg = mobileOpen
     ? 'bg-ryze-dark border border-white/[0.06]'
     : scrolled
-    ? 'bg-white/80 backdrop-blur-xl border border-white/20 shadow-[0_4px_32px_rgba(0,0,0,0.10)]'
+    ? 'bg-[#0A1A0F]/75 backdrop-blur-xl border border-white/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.35)]'
     : 'bg-transparent border border-transparent'
 
-  const logoColor = mobileOpen || !scrolled ? 'text-white' : 'text-[#0A0A0A]'
+  const logoColor = 'text-white'
 
   const btnColor = mobileOpen
     ? 'text-white/70 hover:text-white hover:bg-white/[0.06]'
-    : scrolled
-    ? 'text-[#111111]/70 hover:text-[#111111] hover:bg-black/[0.04]'
-    : 'text-white/80 hover:text-white hover:bg-white/[0.08]'
+    : 'text-white/70 hover:text-white hover:bg-white/[0.06]'
 
   return (
     <>
@@ -100,13 +98,9 @@ export default function Navbar() {
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); handleNav(link.href) }}
                   className={`relative px-4 py-1.5 rounded-full text-sm transition-all duration-200 ${
-                    scrolled
-                      ? activeSection === link.href
-                        ? 'bg-black/[0.06] text-[#0A0A0A] font-medium'
-                        : 'text-[#111111]/55 hover:text-[#0A0A0A]'
-                      : activeSection === link.href
-                        ? 'bg-white/[0.08] text-white font-medium'
-                        : 'text-white/60 hover:text-white'
+                    activeSection === link.href
+                      ? 'bg-white/[0.08] text-white font-medium'
+                      : 'text-white/60 hover:text-white'
                   }`}
                 >
                   {link.label}
@@ -118,7 +112,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => handleNav('#contato')}
-              className="hidden md:inline-flex items-center gap-2 bg-ryze-dark text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#333333] hover:shadow-[0_0_20px_rgba(0,0,0,0.15)] transition-all duration-200 group shrink-0"
+              className="hidden md:inline-flex items-center gap-2 bg-ryze-green text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-ryze-forest-hover transition-all duration-200 group shrink-0"
             >
               Começar agora
               <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-0.5" />
