@@ -1,77 +1,146 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { HeartPulse, Timer, Paintbrush, Layers, Target, Handshake, ArrowRight } from 'lucide-react'
-import TiltCard from '@/components/ui/TiltCard'
+import { ArrowRight } from 'lucide-react'
 import MagneticButton from '@/components/ui/MagneticButton'
-import { fadeUp, fadeUpScale, stagger08, smoothTransition } from '@/lib/animations'
+import { fadeUpScale, stagger08, smoothTransition } from '@/lib/animations'
 import { scrollTo } from '@/lib/scrollTo'
 
-const items = [
-  { icon: HeartPulse, title: 'Especialistas em saúde', description: 'Conhecemos as particularidades do setor — linguagem, regulação e jornada do paciente.' },
-  { icon: Timer, title: 'Entrega rápida', description: 'Processos ágeis que colocam seu projeto no ar em semanas, sem abrir mão da qualidade.' },
-  { icon: Paintbrush, title: 'Design de alto nível', description: 'Interfaces elegantes e funcionais que transmitem credibilidade e profissionalismo.' },
-  { icon: Layers, title: 'Stack moderna', description: 'Tecnologias de ponta que garantem velocidade, segurança e fácil manutenção.' },
-  { icon: Target, title: 'Foco em conversão', description: 'Cada elemento é pensado para transformar visitantes em pacientes ou leads qualificados.' },
-  { icon: Handshake, title: 'Parceria contínua', description: 'Não desaparecemos após a entrega — suporte, evolução e acompanhamento constante.' },
+type Variant = 'light' | 'accent' | 'dark'
+
+const items: { number: string; title: string; description: string; variant: Variant }[] = [
+  {
+    number: '01',
+    title: 'Especialistas em saúde',
+    description: 'Conhecemos as particularidades do setor — linguagem, regulação e jornada do paciente.',
+    variant: 'light',
+  },
+  {
+    number: '02',
+    title: 'Entrega rápida',
+    description: 'Processos ágeis que colocam seu projeto no ar em semanas, sem abrir mão da qualidade.',
+    variant: 'accent',
+  },
+  {
+    number: '03',
+    title: 'Design de alto nível',
+    description: 'Interfaces elegantes e funcionais que transmitem credibilidade e profissionalismo.',
+    variant: 'light',
+  },
+  {
+    number: '04',
+    title: 'Stack moderna',
+    description: 'Tecnologias de ponta que garantem velocidade, segurança e fácil manutenção.',
+    variant: 'dark',
+  },
+  {
+    number: '05',
+    title: 'Foco em conversão',
+    description: 'Cada elemento é pensado para transformar visitantes em pacientes ou leads qualificados.',
+    variant: 'light',
+  },
+  {
+    number: '06',
+    title: 'Parceria contínua',
+    description: 'Não desaparecemos após a entrega — suporte, evolução e acompanhamento constante.',
+    variant: 'accent',
+  },
 ]
+
+const cardStyles: Record<Variant, { card: string; number: string; title: string; description: string }> = {
+  light: {
+    card: 'bg-white border border-ryze-border',
+    number: 'text-ryze-accent/20',
+    title: 'text-ryze-accent',
+    description: 'text-ryze-muted',
+  },
+  accent: {
+    card: 'bg-gradient-to-br from-[#40916C] via-[#2D6A4F] to-[#1B4332]',
+    number: 'text-white/20',
+    title: 'text-white',
+    description: 'text-white/70',
+  },
+  dark: {
+    card: 'bg-[#0A1A0F]',
+    number: 'text-white/15',
+    title: 'text-white',
+    description: 'text-white/55',
+  },
+}
 
 export default function Diferenciais() {
   return (
-    <section id="diferenciais" className="relative px-6 py-28 lg:px-8 lg:py-36">
-      <motion.div
-        layout={false}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.05 }}
-        variants={stagger08}
-        className="relative z-10 mx-auto max-w-6xl"
-      >
+    <section id="diferenciais" className="relative bg-[#f6faf7] px-6 py-24 lg:px-8 lg:py-32">
+      <div className="relative z-10 mx-auto max-w-6xl">
+
+        {/* Header */}
         <motion.div
-          variants={fadeUp}
-          transition={smoothTransition}
-          className="mb-16 max-w-2xl"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-12 lg:mb-16"
         >
-          <span className="mb-4 block font-mono text-xs uppercase tracking-[0.3em] text-ryze-muted">
-            Diferenciais
-          </span>
-          <h2 className="font-display text-4xl font-extrabold tracking-tight text-ryze-text md:text-5xl lg:text-6xl">
-            Feitos para a{' '}
-            <span className="bg-gradient-to-r from-ryze-accent to-ryze-cta bg-clip-text text-transparent">
-              saúde digital.
+          <div className="flex items-center gap-2 mb-4">
+            <ArrowRight size={12} className="text-ryze-muted" />
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-ryze-muted">
+              Por que escolher a Ryze?
             </span>
+          </div>
+          <h2 className="font-display font-black uppercase tracking-tight text-ryze-text text-[clamp(2rem,5vw,4.5rem)] leading-[0.95]">
+            Feitos para a<br />
+            <span className="text-ryze-cta">saúde digital.</span>
           </h2>
         </motion.div>
 
-        <motion.div variants={stagger08} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <motion.div
-              key={item.title}
-              variants={fadeUpScale}
-              transition={smoothTransition}
-            >
-              <TiltCard className="group flex flex-col rounded-2xl border border-ryze-border bg-white p-8 transition-all duration-500 hover:border-ryze-cta/30 hover:shadow-xl hover:shadow-ryze-cta/[0.05] md:p-10">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-ryze-border bg-ryze-surface text-[#111111] transition-all duration-500 group-hover:border-ryze-cta/30 group-hover:bg-[#F3F4F6]">
-                  <item.icon size={22} />
+        {/* Grid de cards */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.05 }}
+          variants={stagger08}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+        >
+          {items.map((item) => {
+            const s = cardStyles[item.variant]
+            return (
+              <motion.div
+                key={item.number}
+                variants={fadeUpScale}
+                transition={smoothTransition}
+                className={`relative rounded-2xl p-7 sm:p-8 lg:p-10 flex flex-col justify-between min-h-[220px] sm:min-h-[260px] lg:min-h-[280px] overflow-hidden ${s.card}`}
+              >
+                {/* Glow decorativo nos cards accent */}
+                {item.variant === 'accent' && (
+                  <div className="pointer-events-none absolute -top-10 -left-10 w-48 h-48 rounded-full bg-white/20 blur-3xl" />
+                )}
+
+                {/* Número */}
+                <span className={`font-mono text-5xl sm:text-6xl font-bold leading-none select-none ${s.number}`}>
+                  {item.number}
+                </span>
+
+                {/* Título + Descrição */}
+                <div>
+                  <h3 className={`font-display font-black uppercase text-xl sm:text-2xl tracking-tight mb-3 leading-tight ${s.title}`}>
+                    {item.title}
+                  </h3>
+                  <p className={`text-sm leading-relaxed ${s.description}`}>
+                    {item.description}
+                  </p>
                 </div>
-
-                <h3 className="mt-6 font-display text-lg font-bold text-ryze-text">
-                  {item.title}
-                </h3>
-
-                <p className="mt-3 text-sm leading-relaxed text-ryze-muted">
-                  {item.description}
-                </p>
-              </TiltCard>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          })}
         </motion.div>
 
-        {/* Section CTA */}
+        {/* CTA */}
         <motion.div
-          variants={fadeUp}
-          transition={smoothTransition}
-          className="mt-16 flex flex-col items-center gap-5 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-14 flex flex-col items-center gap-5 text-center"
         >
           <p className="text-lg font-medium text-ryze-muted">
             Tudo isso no seu projeto.{' '}
@@ -89,7 +158,8 @@ export default function Diferenciais() {
             Resposta em até 24h · Sem compromisso
           </p>
         </motion.div>
-      </motion.div>
+
+      </div>
     </section>
   )
 }
