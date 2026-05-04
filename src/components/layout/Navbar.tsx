@@ -57,7 +57,7 @@ export default function Navbar() {
   const navBg = mobileOpen
     ? 'bg-ryze-dark border border-white/[0.06]'
     : scrolled
-    ? 'bg-white md:bg-white/95 md:backdrop-blur-xl border border-black/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.06)]'
+    ? 'bg-white/80 backdrop-blur-xl border border-white/20 shadow-[0_4px_32px_rgba(0,0,0,0.10)]'
     : 'bg-transparent border border-transparent'
 
   const logoColor = mobileOpen || !scrolled ? 'text-white' : 'text-[#0A0A0A]'
